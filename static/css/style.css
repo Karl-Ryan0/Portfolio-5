@@ -1,0 +1,10 @@
+#logo-banner {
+    max-width: 100%;
+    max-height: 75%;
+}
+
+#logo-container {
+    background-color: #d17630;
+    display: flex;
+    justify-content: center;
+}

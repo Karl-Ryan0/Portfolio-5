@@ -21,7 +21,7 @@
 </head>
 
 <body>
-  <header>
+  <header class="sticky-top">
     <nav class="navbar navbar-expand bg-body-tertiary">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -46,11 +46,10 @@
         </div>
       </div>
     </nav>
-
     <div id="logo-container">
       <img src="{% static 'media/images/logo.png' %}" id="logo-banner" alt="Site logo">
     </div>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-sm bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -78,9 +77,6 @@
                 </li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
             </li>
           </ul>
           <form class="d-flex" role="search">

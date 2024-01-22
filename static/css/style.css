@@ -18,3 +18,37 @@
 .login-navbar .nav-link {
     display: inline-block;
 }
+
+li > a:hover {
+    color: #d17630;
+}
+
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form p, form label {
+    margin-bottom: 15px;
+}
+
+/* Form Input Styles */
+form input[type="text"],
+form input[type="number"],
+form input[type="email"],
+form input[type="password"],
+form textarea,
+form select {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form textarea {
+    height: 150px;
+    resize: vertical;
+}

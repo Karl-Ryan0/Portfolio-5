@@ -1,10 +1,16 @@
 #logo-banner {
     max-width: 100%;
-    max-height: 75%;
+    max-height: 5rem;
 }
 
 #logo-container {
     background-color: #d17630;
     display: flex;
     justify-content: center;
+}
+
+.page-header {
+    display: inline-block;
+    color: red;
+    size: 100px;
 }

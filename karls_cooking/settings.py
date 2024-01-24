@@ -19,7 +19,6 @@ if os.path.isfile('env.py'):
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -29,10 +28,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io']
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io']
 
 
-ALLOWED_HOSTS = ['8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io']
+ALLOWED_HOSTS = ['8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io',
+                 'localhost', 'https://karls-cooking-be3c433797fc.herokuapp.com/']
 
 
 # Application definition
@@ -43,11 +44,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'cloudinary'
     'home',
 ]
 
@@ -164,10 +167,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'cloudinart_storage.storage.StaticHashedCloudinaryStorage'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

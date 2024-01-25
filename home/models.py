@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from cloudinary.models import CloudinaryField
 # Create your models here.
 
@@ -18,6 +19,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name='products')
     name = models.CharField(max_length=50)
+    created_at = models.DateTimeField(default=timezone.now)
     description = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
     image = CloudinaryField('image')

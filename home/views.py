@@ -5,5 +5,5 @@ from .models import Product
 
 
 def index(request):
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('-created_at')[:5]
     return render(request, 'home/index.html', {'products': products})

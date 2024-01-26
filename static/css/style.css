@@ -83,3 +83,13 @@ form textarea {
     text-transform: uppercase;
     text-decoration: underline;
 }
+
+.dropdown {
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: black;
+}

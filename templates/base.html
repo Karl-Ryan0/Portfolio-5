@@ -75,7 +75,7 @@
                 aria-expanded="false">
                 Categories
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown">
                 {% for category in categories %}
                 <li>
                   <a href="{% url 'category_items' category.slug %}">{{ category.name }}</a>

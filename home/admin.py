@@ -9,7 +9,8 @@ admin.site.register(Category)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'price', 'description', 'product_image')
+    list_display = ('name', 'category', 'price', 'description',
+                    'on_sale', 'product_image')
 
     def product_image(self, obj):
         return format_html('<img src="{}" width="auto" height="100px"/>',

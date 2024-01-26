@@ -52,3 +52,11 @@ form textarea {
     height: 150px;
     resize: vertical;
 }
+
+.new-arrivals {
+    text-align: center;
+    font-size: 1.4rem;
+    color :#d17630;
+    margin-bottom: 2em;
+    text-transform: uppercase;
+}

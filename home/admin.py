@@ -11,6 +11,9 @@ admin.site.register(Category)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'price', 'description',
                     'on_sale', 'product_image')
+    list_filter = ('category', 'on_sale')
+    search_fields = ('name', 'description', 'category__name')
+    ordering = ('name', 'price')
 
     def product_image(self, obj):
         return format_html('<img src="{}" width="auto" height="100px"/>',

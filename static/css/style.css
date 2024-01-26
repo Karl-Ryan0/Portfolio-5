@@ -77,3 +77,9 @@ form textarea {
     border-color: #d17630;
     color: black;
 }
+
+.sale-link {
+    color: #d17630;
+    text-transform: uppercase;
+    text-decoration: underline;
+}

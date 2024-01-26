@@ -14,6 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('category', 'on_sale')
     search_fields = ('name', 'description', 'category__name')
     ordering = ('name', 'price')
+    readonly_fields = ('get_image_preview',)
 
     def product_image(self, obj):
         return format_html('<img src="{}" width="auto" height="100px"/>',
@@ -21,3 +22,10 @@ class ProductAdmin(admin.ModelAdmin):
 
     product_image.short_description = 'Image'
     product_image.allow_tags = True
+
+    def get_image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="height:150px; width:auto;" />', obj.image.url)
+        return "(No image)"
+   
+    get_image_preview.short_description = 'Image Preview'

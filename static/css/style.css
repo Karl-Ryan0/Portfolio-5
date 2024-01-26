@@ -60,3 +60,8 @@ form textarea {
     margin-bottom: 2em;
     text-transform: uppercase;
 }
+
+.special-offer {
+    color: #d17630;
+    font-weight: bold;
+}

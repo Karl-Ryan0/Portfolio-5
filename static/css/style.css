@@ -65,3 +65,15 @@ form textarea {
     color: #d17630;
     font-weight: bold;
 }
+
+.store-button {
+    border-color: #d17630;
+    transition: background-color 0.7s; color: black;
+    color: #d17630;
+}
+
+.store-button:hover {
+    background-color: #d17630;
+    border-color: #d17630;
+    color: black;
+}

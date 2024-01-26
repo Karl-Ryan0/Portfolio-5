@@ -5,7 +5,7 @@ from .models import Product, Category
 
 
 def index(request):
-    products = Product.objects.all().order_by('-created_at')[:5]
+    products = Product.objects.all().order_by('-created_at')[:12]
     categories = Category.objects.all()
     return render(request, 'home/index.html', {
         'products': products,
@@ -30,3 +30,8 @@ def category_items(request, category_slug):
 def categories_processor(request):
     categories = Category.objects.all()
     return {'categories': categories}
+
+
+def all_products(request):
+    products = Product.objects.all()
+    return render(request, 'home/all_products.html', {'products': products})

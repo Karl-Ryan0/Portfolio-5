@@ -76,11 +76,11 @@
                 Categories
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Pots & Pans</a></li>
-                <li><a class="dropdown-item" href="#">Stoneware</a></li>
-                <li><a class="dropdown-item" href="#">Glassware</a></li>
-                <li><a class="dropdown-item" href="#">Utensils</a></li>
-                <li><a class="dropdown-item" href="#">Accessories</a></li>
+                {% for category in categories %}
+                <li>
+                  <a href="{% url 'category_items' category.slug %}">{{ category.name }}</a>
+              </li>
+                {% endfor %}
               </ul>
             </li>
           </ul>

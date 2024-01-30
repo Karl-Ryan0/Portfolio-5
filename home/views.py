@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Product, Category
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Product, Category, ContactMessage
+from .forms import ContactForm
 
 # Create your views here.
 
@@ -35,3 +36,27 @@ def categories_processor(request):
 def all_products(request):
     products = Product.objects.all()
     return render(request, 'home/all_products.html', {'products': products})
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            ContactMessage.objects.create(
+                name=form.cleaned_data['name'],
+                email=form.cleaned_data['email'],
+                message=form.cleaned_data['message']
+            )
+            return redirect('contact_success')
+    else:
+        form = ContactForm()
+
+    return render(request, 'home/contact.html', {'form': form})
+
+
+def contact_success(request):
+    return render(request, 'home/contact_success.html')
+
+
+def about(request):
+    return render(request, 'home/about.html')

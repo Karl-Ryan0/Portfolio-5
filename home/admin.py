@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Category, Product
+from .models import Category, Product, ContactMessage
 
 # Register your models here.
 
 admin.site.register(Category)
+admin.site.register(ContactMessage)
 
 
 @admin.register(Product)

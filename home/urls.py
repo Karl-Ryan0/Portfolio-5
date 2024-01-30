@@ -14,4 +14,5 @@ urlpatterns = [
     path('contact_success/', contact_success, name='contact_success'),
     path('about', views.about, name='about'),
     path('product/<int:product_id>/', product_detail, name='product_detail'),
+    path('myaccount/', views.my_account, name='my_account'),
 ]

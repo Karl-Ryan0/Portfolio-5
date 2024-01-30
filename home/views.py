@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, ContactMessage
 from .forms import ContactForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -65,3 +66,7 @@ def about(request):
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'home/product_detail.html', {'product': product})
+
+
+def my_account(request):
+    return render(request, 'home/my_account.html', {'user': request.user})

@@ -2,23 +2,26 @@
 {% load static %}
 
 {% block content %}
+<div class="products-bar"> - SALE -</div>
 <div class="container">
     <div class="row">
         {% for product in sale_items %}
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div class="card">
-                {% if product.image %}
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}<br> €{{ product.price }}</h5>
-                    {% if product.on_sale %}
-                    <span class="text-danger">On Sale!</span>
+            <a href="{% url 'product_detail' product.id %}" class="card-link">
+                <div class="card">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
                     {% endif %}
-                    <p class="card-text">{{ product.description }}</p>
-                    <a href="#" class="btn btn-primary">Add to cart!</a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}<br> €{{ product.price }}</h5>
+                        {% if product.on_sale %}
+                        <span class="text-danger">On Sale!</span>
+                        {% endif %}
+                        <p class="card-text">{{ product.description }}</p>
+                        <a href="#" class="btn btn-primary">Add to cart!</a>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         {% endfor %}
     </div>

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import sale_items, category_items, all_products, contact, contact_success
+from .views import sale_items, category_items, all_products, contact, contact_success, product_detail
 
 
 urlpatterns = [
@@ -13,4 +13,5 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('contact_success/', contact_success, name='contact_success'),
     path('about', views.about, name='about'),
+    path('product/<int:product_id>/', product_detail, name='product_detail'),
 ]

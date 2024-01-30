@@ -60,3 +60,8 @@ def contact_success(request):
 
 def about(request):
     return render(request, 'home/about.html')
+
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'home/product_detail.html', {'product': product})

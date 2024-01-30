@@ -101,3 +101,20 @@ h3 {
 .about-us {
     text-align: center;
 }
+
+.card-link {
+    text-decoration: none;
+    color: black;
+}
+
+.card-link:hover {
+    border-color: #d17630;
+}
+
+.product-image{
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}

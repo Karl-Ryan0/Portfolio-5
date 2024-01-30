@@ -7,6 +7,7 @@
     <div class="row">
         {% for product in products %}
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <a href="{% url 'product_detail' product.id %}" class="card-link">
             <div class="card">
                 {% if product.image %}
                 <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
@@ -23,6 +24,7 @@
                     <a href="#" class="btn store-button">Add to cart!</a>
                 </div>
             </div>
+            </a>
         </div>
         {% endfor %}
     </div>

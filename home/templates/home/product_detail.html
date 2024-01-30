@@ -1,8 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="products-bar"> - {{ product.name }} -</div>
-  <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
-  <p>{{ product.description }}</p>
-  <p>Price: €{{ product.price }} <a href="#" class="btn btn-primary">Add to cart!</a></p>
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="products-bar"> - {{ product.name }} -</div>
+            {% if product.on_sale %}
+            <p class="price special-offer">€{{ product.price }} <span class="special-offer"> - Special Offer!</span></p>
+            {% else %}
+            <p class="price">€{{ product.price }}</p>
+            {% endif %}
+            <p>{{ product.description|safe }}</p>
+        </div>
+        <div class="col-md-6">
+            <img class="product-image img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+            <div class="quantity-section mt-3">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control w-25 d-inline">
+                <button class="btn store-button" id="product-cart-btn">Add to Cart!</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

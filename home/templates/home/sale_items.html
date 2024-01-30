@@ -13,11 +13,13 @@
                     <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
                     {% endif %}
                     <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}<br> €{{ product.price }}</h5>
+                        <h5 class="card-title">{{ product.name }}</h5>
                         {% if product.on_sale %}
-                        <span class="text-danger">On Sale!</span>
+                        <p class="price special-offer">€{{ product.price }} <span class="special-offer"> - Special
+                                Offer!</span></p>
+                        {% else %}
+                        <p class="price">€{{ product.price }}</p>
                         {% endif %}
-                        <p class="card-text">{{ product.description }}</p>
                         <a href="#" class="btn btn-primary">Add to cart!</a>
                     </div>
                 </div>

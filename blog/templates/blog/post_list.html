@@ -4,12 +4,12 @@
 {% block content %}
 {% for post in page_obj %}
 <div class="post">
-    <h2>{{ post.title|safe }}</h2>
-    <img class="post-image img-fluid" src="{{ post.main_image.url }}" alt="{{ post.title }}">
-    <p>{{ post.body|safe }}</p>
-    <img class="post-image img-fluid" src="{{ post.body_image.url }}" alt="{{ post.title }}">
-    <p>{{ post.recipe|safe }}</p>
+    <h2><a class="blog-header" href="{% url 'post_detail' post.id %}">{{ post.title|safe }}</a></h2>
+    <img class="blog-image img-fluid" src="{{ post.main_image.url }}" alt="{{ post.title }}">
+    <p>{{ post.body|safe|truncatewords:60 }}</p>
+    <hr class="blog-hr">
 </div>
+
 {% endfor %}
 
 <div class="pagination">

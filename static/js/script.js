@@ -1,18 +1,19 @@
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Assuming 'add-to-cart-btn' is your button class
     const addToCartButtons = document.querySelectorAll('.cart-btn');
 
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
-            showToast("Item added to your cart successfully!");
+            const message = this.getAttribute('data-message');
+            const imageUrl = this.getAttribute('data-image-url');
+            showToast(message, imageUrl);
         });
     });
 
-    function showToast(message) {
-        const toastHTML = `<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="500000">
+    function showToast(message, imageUrl) {
+        const toastHTML = `<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
           <div class="toast-header">
+            <img src="${imageUrl}" class="rounded me-2" alt="Product" style="width: 20px; height: 20px;">
             <strong class="me-auto">Added to Cart!</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
 
 function openTab(evt, tabName) {
 

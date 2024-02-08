@@ -10,21 +10,24 @@
             <a href="{% url 'product_detail' product.id %}" class="card-link">
                 <div class="card">
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}"> </a>
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        {% if product.on_sale %}
-                        <p class="price special-offer">€{{ product.price }} <span class="special-offer"> - Special
-                                Offer!</span></p>
-                        {% else %}
-                        <p class="price">€{{ product.price }}</p>
-                        {% endif %}
-                        <button data-product-id="{{ product.id }}" class="btn cart-btn store-button">Add to cart!</a>
-                    </div>
-                </div>
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+            </a>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                {% if product.on_sale %}
+                <p class="price special-offer">€{{ product.price }} <span class="special-offer"> - Special
+                        Offer!</span></p>
+                {% else %}
+                <p class="price">€{{ product.price }}</p>
+                {% endif %}
+                <button data-product-id="{{ product.id }}"
+                    data-message="{{ product.name }} has been added to your cart successfully!" data-image-url="{{ product.image.url }}"
+                    class="btn cart-btn store-button">Add to cart!</a>
+            </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
 </div>
 {% endblock %}

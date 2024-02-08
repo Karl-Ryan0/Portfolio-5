@@ -28,5 +28,5 @@ class ProductAdmin(admin.ModelAdmin):
         if obj.image:
             return format_html('<img src="{}" style="height:150px; width:auto;" />', obj.image.url)
         return "(No image)"
-   
+
     get_image_preview.short_description = 'Image Preview'

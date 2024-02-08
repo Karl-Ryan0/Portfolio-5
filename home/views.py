@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, ContactMessage
-from .forms import ContactForm
-from django.contrib.auth.decorators import login_required
+from .forms import ContactForm, ProductForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
 
@@ -70,3 +70,20 @@ def product_detail(request, product_id):
 
 def my_account(request):
     return render(request, 'home/my_account.html', {'user': request.user})
+
+
+def staff_check(user):
+    return user.is_staff
+
+@login_required
+@user_passes_test(staff_check)
+def edit_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('product_detail', product_id=product.id)
+    else:
+        form = ProductForm(instance=product)
+    return render(request, 'home/edit_product.html', {'form': form, 'product': product})

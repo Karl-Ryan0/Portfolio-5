@@ -4,7 +4,10 @@
 
 <body>
     <div class="container">
-        <div class="products-bar">- My Account -</div>
+        <div class="products-bar">- My Account - <br> {% if request.user.is_staff %}
+            <div class="staff-badge">Employee <i class="fas fa-star"></i></div>
+            {% endif %}
+        </div>
 
         <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'Profile')" id="defaultOpen">Profile</button>
@@ -20,9 +23,10 @@
             <p><strong>Username:</strong> {{ request.user.username }}</p>
             <p><strong>Name:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
             <p><strong>Email:</strong> {{ request.user.email }}</p>
-            {% if request.user.is_staff %}
-            <div class="staff-badge">Employee <i class="fas fa-star"></i></div>
-            {% endif %}
+            <div class="edit-profile-button">
+                <a href="{% url 'edit_profile' %}" class="btn edit-button">Edit Profile</a>
+            </div>
+
         </div>
 
         <div id="ChangePassword" class="tabcontent">

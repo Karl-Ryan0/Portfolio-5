@@ -10,7 +10,7 @@
             <a href="{% url 'product_detail' product.id %}" class="card-link">
                 <div class="card">
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}"> </a>
                     {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
@@ -20,10 +20,9 @@
                         {% else %}
                         <p class="price">€{{ product.price }}</p>
                         {% endif %}
-                        <a href="#" class="btn store-button">Add to cart!</a>
+                        <button data-product-id="{{ product.id }}" class="btn cart-btn store-button">Add to cart!</a>
                     </div>
                 </div>
-            </a>
         </div>
         {% endfor %}
     </div>

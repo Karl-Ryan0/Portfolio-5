@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import sale_items, category_items, all_products, contact, contact_success, product_detail, edit_product
+from .views import sale_items, category_items, all_products, contact, contact_success, product_detail, edit_product, add_to_cart
 
 
 urlpatterns = [
@@ -16,4 +16,5 @@ urlpatterns = [
     path('product/<int:product_id>/', product_detail, name='product_detail'),
     path('myaccount/', views.my_account, name='my_account'),
     path('product/edit/<int:product_id>/', edit_product, name='edit_product'),
+    path('add_to_cart/', add_to_cart, name='add_to_cart'),
 ]

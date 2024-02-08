@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, ContactMessage
 from .forms import ContactForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 
@@ -75,6 +76,7 @@ def my_account(request):
 def staff_check(user):
     return user.is_staff
 
+
 @login_required
 @user_passes_test(staff_check)
 def edit_product(request, product_id):
@@ -87,3 +89,13 @@ def edit_product(request, product_id):
     else:
         form = ProductForm(instance=product)
     return render(request, 'home/edit_product.html', {'form': form, 'product': product})
+
+
+def add_to_cart(request):
+    data = json.loads(request.body)
+    product_id = data.get('product_id')
+    product = get_object_or_404(Product, id=product_id)
+    cart = Cart(request)  # Initialize cart from session
+    cart.add(product, quantity=1)
+
+    return JsonResponse({'success': True})

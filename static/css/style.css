@@ -177,4 +177,13 @@ button {
     border-radius: 5px;
     background-color: white;
 }
+
+#toastContainer {
+    top: 20%;
+    right: 20%;
+}
+
+.toast-header{
+    color: #d17630;
+}
   

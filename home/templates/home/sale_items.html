@@ -7,35 +7,7 @@
     <div class="row">
         {% for product in sale_items %}
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <a href="{% url 'product_detail' product.id %}" class="card-link">
-                <div class="card">
-                    {% if product.image %}
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <div class="price-stock-container">
-                            {% if product.on_sale %}
-                            <span class="price special-offer">€{{ product.price }} - Special Offer!</span>
-                            {% else %}
-                            <span class="price">€{{ product.price }}</span>
-                            {% endif %}
-                            <br>
-                            {% if product.stock > 10 %}
-                            <span class="in-stock">In Stock!</span>
-                            {% elif product.stock > 0 %}
-                            <span class="low-stock">Low Stock - {{ product.stock }} Left</span>
-                            {% else %}
-                            <span class="out-of-stock">Out of Stock</span>
-                            {% endif %}
-                        </div>
-                        <button data-product-id="{{ product.id }}"
-                            data-message="{{ product.name }} has been added to your cart successfully!"
-                            data-image-url="{{ product.image.url }}" class="btn cart-btn store-button">Add to
-                            cart!</button>
-                    </div>
-                </div>
-            </a>
+                {% include 'includes/_product_card.html' %}
         </div>
         {% endfor %}
     </div>

@@ -23,6 +23,9 @@
             <p><strong>Username:</strong> {{ request.user.username }}</p>
             <p><strong>Name:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
             <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Mailing list:</strong> {{ user_profile.shopping_mailing_list|yesno:"Yes,No" }} <strong> Blog Mailing
+                    list:</strong> {{ user_profile.blog_mailing_list|yesno:"Yes,No" }}</p>
+
             <div class="edit-profile-button">
                 <a href="{% url 'edit_profile' %}" class="btn edit-button">Edit Profile</a>
             </div>

@@ -8,7 +8,7 @@ from django.views.decorators.http import require_POST
 
 
 def index(request):
-    products = Product.objects.all().order_by('-created_at')[:12]
+    products = Product.objects.all().order_by('-created_at')[:4]
     categories = Category.objects.all()
     return render(request, 'home/index.html', {
         'products': products,
@@ -95,7 +95,7 @@ def add_to_cart(request):
     data = json.loads(request.body)
     product_id = data.get('product_id')
     product = get_object_or_404(Product, id=product_id)
-    cart = Cart(request)  # Initialize cart from session
+    cart = Cart(request)
     cart.add(product, quantity=1)
 
     return JsonResponse({'success': True})

@@ -46,5 +46,3 @@ class ContactMessage(models.Model):
     def __str__(self):
         return f"Message from {self.name} received at {
             self.received_at.strftime('%Y-%m-%d %H:%M')}"
-
-

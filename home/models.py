@@ -31,6 +31,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     image = CloudinaryField('image')
     on_sale = models.BooleanField(default=False)
+    stock = models.IntegerField(default=50)
 
     def __str__(self):
         return self.name

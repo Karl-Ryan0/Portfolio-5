@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from .models import Post
+from .forms import PostForm
 
 
 def post_list(request):
@@ -15,3 +16,15 @@ def post_list(request):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     return render(request, 'blog/post_detail.html', {'post': post})
+
+
+def edit_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', post_id=post.id)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/edit_post.html', {'form': form})

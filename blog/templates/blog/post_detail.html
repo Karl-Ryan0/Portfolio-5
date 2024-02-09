@@ -2,11 +2,14 @@
 
 {% block content %}
 <div class="post">
-    <h2><a class="blog-header" href="{% url 'post_detail' post.id %}">{{ post.title|safe }}</a></h2>
+    <h2>{{ post.title|safe }}{% if request.user.is_staff %}
+         / <a href="{% url 'edit_post' post.id %}" class="btn store-button">Edit Post</a>
+        {% endif %}
+    </h2>
     <img class="post-image img-fluid" src="{{ post.main_image.url }}" alt="{{ post.title }}">
     <p>{{ post.body|safe }}</p>
     <img class="post-image img-fluid" src="{{ post.body_image.url }}" alt="{{ post.title }}">
     <p>{{ post.recipe|safe }}</p>
     <hr class="blog-hr">
-</div>
-{% endblock %}
+
+    {% endblock %}

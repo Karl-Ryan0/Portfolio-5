@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="products-bar"> - New Arrivals -</div>
+<div class="products-bar">- New Arrivals -</div>
 <div class="container">
     <div class="row">
         {% for product in products %}
@@ -15,15 +15,24 @@
             {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
-                {% if product.on_sale %}
-                <p class="price special-offer">€{{ product.price }} <span class="special-offer"> - Special
-                        Offer!</span></p>
-                {% else %}
-                <p class="price">€{{ product.price }}</p>
-                {% endif %}
+                <div class="price-stock-container">
+                    {% if product.on_sale %}
+                    <span class="price special-offer">€{{ product.price }} - Special Offer!</span>
+                    {% else %}
+                    <span class="price">€{{ product.price }}</span>
+                    {% endif %}
+                    <br>
+                    {% if product.stock > 10 %}
+                    <span class="in-stock">In Stock!</span>
+                    {% elif product.stock > 0 %}
+                    <span class="low-stock">Low Stock - {{ product.stock }} Left</span>
+                    {% else %}
+                    <span class="out-of-stock">Out of Stock</span>
+                    {% endif %}
+                </div>
                 <button data-product-id="{{ product.id }}"
-                    data-message="{{ product.name }} has been added to your cart successfully!" data-image-url="{{ product.image.url }}"
-                    class="btn cart-btn store-button">Add to cart!</button>
+                    data-message="{{ product.name }} has been added to your cart successfully!"
+                    data-image-url="{{ product.image.url }}" class="btn cart-btn store-button">Add to cart!</button>
             </div>
         </div>
     </div>

@@ -218,3 +218,23 @@ button {
     opacity: 1;
     margin: 0 25%;
 }
+
+.price {
+    font-weight: bold;
+}
+
+.low-stock, .in-stock, .out-of-stock {
+    font-weight: bold;
+}
+
+.in-stock {
+    color: green;
+}
+
+.low-stock {
+    color: #d17630;
+}
+
+.out-of-stock {
+    color: red;
+}

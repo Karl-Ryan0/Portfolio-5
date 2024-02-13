@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
-{% load static %}
-
 {% block content %}
-<div class="products-bar"> - {{ category.name }} -</div>
+{% if results %}
+
+<div class="products-bar">- Search Results -</div>
 <div class="container">
     <div class="row">
-        {% for product in products %}
+        {% for product in results %}
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 {% include 'includes/_product_card.html' %}
         </div>
         {% endfor %}
     </div>
 </div>
+{% else %}
+<p>No results found.</p>
+{% endif %}
 {% endblock %}

@@ -86,9 +86,12 @@
             </li>
           </ul>
           <span class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn store-button" type="submit">Search</button>
+            <form action="{% url 'search_results' %}" method="get" class="d-flex" role="search">
+              <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+              <button class="btn store-button" type="submit">Search</button>
+          </form>
           </span>
+
         </div>
       </div>
     </nav>

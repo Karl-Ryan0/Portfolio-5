@@ -17,4 +17,5 @@ urlpatterns = [
     path('myaccount/', views.my_account, name='my_account'),
     path('product/edit/<int:product_id>/', edit_product, name='edit_product'),
     path('add_to_cart/', add_to_cart, name='add_to_cart'),
+    path('search/', views.search_results, name='search_results'),
 ]

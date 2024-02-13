@@ -99,3 +99,13 @@ def add_to_cart(request):
     cart.add(product, quantity=1)
 
     return JsonResponse({'success': True})
+
+
+def search_results(request):
+    query = request.GET.get('query')
+    if query:
+        results = Product.objects.filter(name__icontains=query)
+    else:
+        results = Product.objects.none()
+    
+    return render(request, 'home/search_results.html', {'results': results})

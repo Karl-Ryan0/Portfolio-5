@@ -238,3 +238,9 @@ button {
 .out-of-stock {
     color: red;
 }
+
+form {
+    margin: 0 ;
+    padding: 0;
+    border: none;
+}

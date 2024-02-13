@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Messages</h2>
+
+<div class="messages">
+    {% for message in page_obj %}
+    <div class="message">
+        <p><strong>{{ message.name }}</strong> ({{ message.email }}) said:</p>
+        <p>{{ message.message }}</p>
+        <p>Sent on {{ message.received_at }}</p>
+        <a href="{% url 'delete_message' message.id %}">Delete</a>
+    </div>
+    {% empty %}
+    <p>No messages to display.</p>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+</div>
+
+{% endblock %}

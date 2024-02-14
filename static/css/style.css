@@ -244,3 +244,15 @@ form {
     padding: 0;
     border: none;
 }
+
+.cart-product {
+    border-radius: 20%;
+}
+
+.cart-item-container {
+    text-align: center;
+}
+
+.cart-hr {
+    margin-top: 15px;
+}

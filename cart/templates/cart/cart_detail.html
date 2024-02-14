@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Your Cart</h2>
-{% for item in cart.items.all %}
-    <p>{{ item.product.name }} - Quantity: {{ item.quantity }} - Price: {{ item.total_price }}</p>
-{% endfor %}
+<div class="products-bar"> - Your Cart -</div>
+<div class="container">
+    <div class="row">
+        {% for item in cart.items.all %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 cart-item-container">
+            <a href="{% url 'product_detail' item.product.id %}" class="card-link">
+                <img src="{{ item.product.image.url }}" class="card-img-top cart-product" alt="{{ product.name }}"></a>
+                <hr class="blog-hr cart-hr">
+                {% if item.product.on_sale %}
+                <span class="price special-offer">€{{ item.product.price }} - Special Offer!</span>
+                {% else %}
+                <span class="price">€{{ item.product.price }}</span>
+                {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

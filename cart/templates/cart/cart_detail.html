@@ -17,7 +17,7 @@
                 <span class="price">€{{ item.product.price }}</span>
                 {% endif %}
 
-                <form action="#" method="post">
+                <form action="{% url 'update_cart_item' item.id %}" method="post">
                     {% csrf_token %}
                     <div class="d-flex justify-content-around">
                     <span>Quantity:<input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control"></span></div>

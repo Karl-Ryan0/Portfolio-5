@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from .models import Post
 from .forms import PostForm
+from django.contrib.auth.decorators import login_required
 
 
 def post_list(request):
@@ -28,3 +29,20 @@ def edit_post(request, post_id):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/edit_post.html', {'form': form})
+
+
+@login_required
+def create_article(request):
+    if not request.user.is_staff:
+        return redirect('post_list')
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.poster_name = request.user.username
+            post.save()
+            return redirect('post_detail', post.id)
+    else:
+        form = PostForm()
+    return render(request, 'blog/create_article.html', {'form': form})

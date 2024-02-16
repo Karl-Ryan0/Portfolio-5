@@ -2,7 +2,12 @@
 {% load static %}
 
 {% block content %}
+<div class="create-article">
+    <a href="{% url 'create_article' %}" class="btn store-button">Create Article</a>
+</div>
 {% for post in page_obj %}
+{% if user.is_staff %}
+{% endif %}
 <div class="post">
     <h2><a class="blog-header" href="{% url 'post_detail' post.id %}">{{ post.title|safe }}</a></h2>
     <img class="blog-image img-fluid" src="{{ post.main_image.url }}" alt="{{ post.title }}">

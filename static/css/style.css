@@ -1,4 +1,3 @@
-/* Logo and Header Styles */
 #logo-banner {
     max-width: 100%;
     max-height: 5rem;
@@ -10,22 +9,20 @@
     justify-content: center;
 }
 
-/* Navigation and Links */
-.login-navbar .nav-link,
-li>a:hover,
-.sale-link {
+.page-header {
     display: inline-block;
-    color: #d17630; /* Hover color for links */
-    text-transform: uppercase;
-    text-decoration: none; /* Underline for sale links */
+    color: red;
+    size: 100px;
 }
 
-.dropdown a {
-    text-decoration: none;
-    color: black;
+.login-navbar .nav-link {
+    display: inline-block;
 }
 
-/* Form Styles */
+li>a:hover {
+    color: #d17630;
+}
+
 form {
     max-width: 600px;
     margin: 20px auto;
@@ -35,6 +32,12 @@ form {
     border-radius: 4px;
 }
 
+form p,
+form label {
+    margin-bottom: 15px;
+}
+
+/* Form Input Styles */
 form input[type="text"],
 form input[type="number"],
 form input[type="email"],
@@ -51,19 +54,184 @@ form textarea {
     resize: vertical;
 }
 
-/* Product and Post Display */
-.products-bar,
-h3, h2, h1,
-.about-us {
+.products-bar {
     text-align: center;
-    color: #d17630; /* Main color theme */
     font-size: 1.4rem;
+    color: #d17630;
     margin-bottom: 2em;
     text-transform: uppercase;
 }
 
-.special-offer,
-.price,
+.special-offer {
+    color: #d17630;
+    font-weight: bold;
+}
+
+.store-button,
+button {
+    border-color: #d17630;
+    transition: background-color 0.7s;
+    color: black;
+    color: #d17630;
+}
+
+.store-button:hover,
+button:hover {
+    background-color: #d17630;
+    border-color: #d17630;
+    color: black;
+}
+
+.sale-link {
+    color: #d17630;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+
+.dropdown {
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: black;
+}
+
+h3,
+h2,
+h1 {
+    color: #d17630;
+}
+
+.about-us {
+    text-align: center;
+}
+
+.card-link {
+    text-decoration: none;
+    color: black;
+}
+
+.card-link:hover {
+    border-color: #d17630;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.post-image {
+    width: 60%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 15%;
+}
+
+.blog-image {
+
+    width: 60%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 2em auto;
+    border-radius: 15%;
+}
+
+#product-cart-btn {
+    left: 20%;
+    position: relative;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    border: none;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    background-color: #f1f1f1;
+}
+
+.staff-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-top: 10px;
+    background-color: #d17630;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.edit-button {
+    background-color: #d17630;
+    transition: background-color 0.7s;
+    color: black;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #f1f1f1;
+    border-color: #d17630;
+    color: #d17630;
+}
+
+button {
+    border-radius: 5px;
+    background-color: white;
+}
+
+#toastContainer {
+    top: 20%;
+    right: 20%;
+}
+
+.toast-header,
+.blog-header {
+    color: #d17630;
+}
+
+.blog-header {
+    text-decoration: none;
+}
+
+.blog-header:hover {
+    color: #ccc;
+}
+
+.blog-hr {
+    border: 2px solid #d17630;
+    opacity: 1;
+    margin: 0 25%;
+}
+
+.price {
+    font-weight: bold;
+}
+
 .low-stock,
 .in-stock,
 .out-of-stock {
@@ -75,104 +243,45 @@ h3, h2, h1,
 }
 
 .low-stock {
-    color: #d17630; /* Same as main theme color */
+    color: #d17630;
 }
 
 .out-of-stock {
     color: red;
 }
 
-/* Buttons and Interactions */
-.store-button,
-button,
-.edit-button {
-    border-color: #d17630;
-    transition: background-color 0.7s;
-    color: black;
-    border-radius: 5px;
-    background-color: white; /* Overridden by .edit-button */
-}
-
-.store-button:hover,
-button:hover,
-.edit-button:hover {
-    background-color: #d17630;
-    color: white; /* Text color change on hover */
-}
-
-/* Images and Media */
-.product-image,
-.post-image,
-.blog-image,
-.cart-product {
-    width: 100%;
-    max-width: 500px; /* Adjusted for different contexts */
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 15%; /* Specific to post and blog images */
-}
-
-/* Tabs and Badges */
-.tab,
-.tabcontent,
-.staff-badge {
-    overflow: hidden;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    color: white; /* Staff badge text color */
-}
-
-.tab button,
-.tab button.active,
-.tab button:hover {
+form {
+    margin: 0;
+    padding: 0;
     border: none;
-    padding: 14px 16px;
-    transition: 0.3s;
-    background-color: #ddd; /* Hover and active state */
 }
 
-/* Toast Notifications */
-#toastContainer {
-    top: 20%;
-    right: 20%;
+.cart-product {
+    border-radius: 20%;
 }
 
-.toast-header,
-.blog-header {
-    color: #d17630;
-}
-
-/* Miscellaneous Styles */
-.page-header {
-    display: inline-block;
-    color: red;
-    size: 100px;
-}
-
-.blog-hr,
-.cart-hr {
-    border: 2px solid #d17630;
-    opacity: 1;
-    margin: 0 25%;
-}
-
-/* Cart Specific Styles */
-.cart-item-container,
-.cart-summary {
+.cart-item-container {
     text-align: center;
+}
+
+.cart-hr {
+    margin-top: 15px;
+}
+
+.cart-summary {
     display: flex;
-    flex-direction: row-reverse;
     width: auto;
     padding: 25px 10px;
+    flex-direction: row-reverse;
+    
 }
 
 .cart-summary h3,
 .cart-summary .btn {
     margin: 0 10px;
-    margin-right: 20px; /* Closer alignment */
+}
+
+
+.cart-summary h3 {
+    margin-right: 20px;
 }

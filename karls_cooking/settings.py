@@ -32,7 +32,7 @@ CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io', 'https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io']
 
 
-ALLOWED_HOSTS = ['8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io', '8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io']
+ALLOWED_HOSTS = ['8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io', '8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io', 'karls-cooking-be3c433797fc.herokuapp.com']
 
 
 # Application definition

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cart, CartItem, Product
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_POST
 from django.http import JsonResponse
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -63,6 +65,7 @@ def update_cart_item(request, item_id):
         return redirect('cart_detail')
 
 
+@require_POST
 def remove_item(request, item_id):
     cart_item = None
 
@@ -77,6 +80,8 @@ def remove_item(request, item_id):
 
     if cart_item:
         cart_item.delete()
-        return JsonResponse({'success': True})
+        messages.add_message(request, messages.SUCCESS, 'Item removed successfully.')
+        return redirect('cart_detail')
     else:
-        return JsonResponse({'error': 'Item not found or cart session expired'}, status=404)
+        messages.add_message(request, messages.ERROR, 'Item not found or cart session expired.')
+        return redirect('cart_detail')

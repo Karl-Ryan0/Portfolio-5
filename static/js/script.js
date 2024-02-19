@@ -23,7 +23,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.remove-item-btn').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
+            const confirmRemoval = confirm('Are you sure you want to remove this item?');
+        if (confirmRemoval) {
+            this.closest('form').submit();}
             const itemId = this.dataset.itemId;
+            const itemName = this.dataset.itemName;
             fetch(`/cart/remove_item/${itemId}/`, {
                 method: 'DELETE',
                 headers: {
@@ -34,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (data.success) {
                     document.querySelector(`#cart-item-container-${itemId}`).remove();
-                    console.log("Item removed");
+                    displayMessage(`${itemName} has been removed successfully.`);
                 }
             });
         });
@@ -54,4 +58,14 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function displayMessage(message) {
+    const toastContainer = document.getElementById('toastContainer');
+    toastContainer.innerText = message;
+    toastContainer.style.display = 'block';
+
+    setTimeout(() => {
+        toastContainer.style.display = 'none';
+    }, 5000);
 }

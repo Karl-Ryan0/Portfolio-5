@@ -26,7 +26,7 @@
                 </form>
                 <form action="{% url 'remove_item' item.id %}" method="post">
                     {% csrf_token %}
-                <input type="submit" value="Remove" class="btn edit-button mt-2">
+                <input type="submit" value="Remove" data-item-id="{{ item.id }}" data-item-name="{{ item.product.name }}" class="btn edit-button mt-2 remove-item-btn">
                 </form>
             </div>
         </div>

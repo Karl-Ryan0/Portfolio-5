@@ -20,6 +20,10 @@
             <span class="out-of-stock">Out of Stock</span>
             {% endif %}
         </div>
+        {% if product.stock > 0 %}
         <a class="btn store-button" href="{% url 'add_to_cart' product.id %}">Add to cart</a>
+        {% else %}
+        <button class="btn store-button disabled" disabled>Out of Stock</button>
+        {% endif %}
     </div>
 </div>

@@ -29,10 +29,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io', 'https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io',
+                        'https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io']
 
 
-ALLOWED_HOSTS = ['8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io', '8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io', 'karls-cooking-be3c433797fc.herokuapp.com']
+ALLOWED_HOSTS = ['8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io',
+                 '8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io', 'karls-cooking-be3c433797fc.herokuapp.com']
 
 
 # Application definition
@@ -84,6 +86,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'home.views.categories_processor',
+                'cart.context_processors.cart_processor',
             ],
         },
     },

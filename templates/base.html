@@ -87,14 +87,14 @@
               </ul>
             </li>
             <li>
-              <a class="nav-link"href="{% url 'cart_detail' %}">
+              <a class="nav-link" href="{% url 'cart_detail' %}">
                 | Cart
-                {% if cart %}
-                ({{ cart|length }})
+                {% if cart.item_count %}
+                ({{ cart.item_count }})
                 {% else %}
-                (0)
+                (Empty)
                 {% endif %}
-              </a>
+            </a>            
             </li>
           </ul>
           

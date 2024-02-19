@@ -12,6 +12,10 @@ class Cart(models.Model):
     def total_price(self):
         return sum(item.total_price() for item in self.items.all())
 
+    @property
+    def item_count(self):
+        return self.items.count()
+
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items',

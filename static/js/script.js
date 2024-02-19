@@ -1,33 +1,57 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const addToCartButtons = document.querySelectorAll('.cart-btn');
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const message = this.getAttribute('data-message');
-            const imageUrl = this.getAttribute('data-image-url');
-            showToast(message, imageUrl);
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('change', function() {
+            const itemId = this.dataset.itemId;
+            const newQuantity = this.value;
+            fetch(`/cart/update_quantity/${itemId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({quantity: newQuantity})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Quantity updated");
+                }
+            });
         });
     });
 
-    function showToast(message, imageUrl) {
-        const toastHTML = `<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-          <div class="toast-header">
-            <img src="${imageUrl}" class="rounded me-2" alt="Product" style="width: 20px; height: 20px;">
-            <strong class="me-auto">Added to Cart!</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            ${message}
-          </div>
-        </div>`;
-
-        const toastContainer = document.getElementById('toastContainer');
-        toastContainer.innerHTML += toastHTML;
-
-        var toastElList = [].slice.call(document.querySelectorAll('.toast'));
-        var toastList = toastElList.map(function(toastEl) {
-          return new bootstrap.Toast(toastEl).show();
+    document.querySelectorAll('.remove-item-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const itemId = this.dataset.itemId;
+            fetch(`/cart/remove_item/${itemId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.querySelector(`#cart-item-container-${itemId}`).remove();
+                    console.log("Item removed");
+                }
+            });
         });
-    }
+    });
 });
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=') ) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cart, CartItem, Product
+from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -59,3 +61,22 @@ def update_cart_item(request, item_id):
         except CartItem.DoesNotExist:
             pass
         return redirect('cart_detail')
+
+
+def remove_item(request, item_id):
+    cart_item = None
+
+    if request.user.is_authenticated:
+        cart_item = get_object_or_404(
+            CartItem, id=item_id, cart__user=request.user)
+    else:
+        cart_id = request.session.get('cart_id')
+        if cart_id:
+            cart = get_object_or_404(Cart, id=cart_id)
+            cart_item = get_object_or_404(CartItem, id=item_id, cart=cart)
+
+    if cart_item:
+        cart_item.delete()
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'error': 'Item not found or cart session expired'}, status=404)

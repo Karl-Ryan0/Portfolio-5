@@ -20,7 +20,11 @@
                 {% if request.user.is_staff %}
                 <a href="{% url 'edit_product' product.id %}" class="btn store-button">Edit</a>
                 {% endif %}
-                <button class="btn store-button" id="product-cart-btn">Add to Cart!</button>
+                {% if product.stock > 0 %}
+                <a class="btn store-button" href="{% url 'add_to_cart' product.id %}">Add to cart</a>
+                {% else %}
+                <button class="btn store-button disabled">Out of Stock</button>
+                {% endif %}
             </div>
         </div>
     </div>

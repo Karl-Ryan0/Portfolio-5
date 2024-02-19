@@ -1,3 +1,17 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
 #logo-banner {
     max-width: 100%;
     max-height: 5rem;
@@ -73,6 +87,7 @@ button {
     transition: background-color 0.7s;
     color: black;
     color: #d17630;
+    border: 1px solid #d17630;
 }
 
 .store-button:hover,
@@ -201,7 +216,6 @@ h1 {
 
 button {
     border-radius: 5px;
-    background-color: white;
 }
 
 #toastContainer {
@@ -250,10 +264,11 @@ button {
     color: red;
 }
 
-form {
+.search {
     margin: 0;
     padding: 0;
     border: none;
+    display: flex;
 }
 
 .cart-product {

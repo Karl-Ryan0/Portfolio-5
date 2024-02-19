@@ -3,16 +3,21 @@ from .models import Cart
 
 def cart_processor(request):
     cart_id = request.session.get('cart_id', None)
-
+    cart = None
+    total_price = 0
+    
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(user=request.user)
-    else:
-        if cart_id is None:
-            cart = Cart.objects.create()
-            request.session['cart_id'] = cart.id
-        else:
-            cart, created = Cart.objects.get_or_create(id=cart_id)
-            if created:
-                request.session['cart_id'] = cart.id
+        total_price = cart.total_price
+    elif cart_id:
+        try:
+            cart = Cart.objects.get(id=cart_id)
+            total_price = cart.total_price
+        except Cart.DoesNotExist:
+            pass
 
-    return {'cart': cart}
+    return {
+        'cart': cart,
+        'total_price': total_price,
+        'cart_item_count': cart.item_count if cart else 0
+    }

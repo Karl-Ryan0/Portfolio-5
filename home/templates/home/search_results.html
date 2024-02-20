@@ -1,25 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="products-bar-sort products-bar">- Search Results -
-    <form class="search" method="get" action="{% url 'search_results' %}"> Sort: 
+    <form class="search search-form d-flex align-items-center" method="get" action="{% url 'search_results' %}">
+        Sort:
         <input type="hidden" name="query" value="{{ query }}">
         <select name="sort" onchange="this.form.submit()">
             <option value="name" {% if sort == 'name' %}selected{% endif %}>A - Z</option>
             <option value="price_low_to_high" {% if sort == 'price_low_to_high' %}selected{% endif %}>Price Low to High</option>
             <option value="price_high_to_low" {% if sort == 'price_high_to_low' %}selected{% endif %}>Price High to Low</option>
+            <option value="date_newest" {% if sort == 'date_newest' %}selected{% endif %}>Newest</option>
+            <option value="date_oldest" {% if sort == 'date_oldest' %}selected{% endif %}>Oldest</option>
         </select>
+    </form>
+    <form class="search filter-form">
+        <label><input type="checkbox" name="in_stock" {% if in_stock %}checked{% endif %}> In Stock</label>
+        <label><input type="checkbox" name="on_sale" {% if on_sale %}checked{% endif %}> On Sale</label>
+        <input class="btn store-button" type="submit" value="Apply Filters">
     </form>
 </div>
 <div class="container">
     <div class="row">
         {% if results %}
-            {% for product in results %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    {% include 'includes/_product_card.html' %}
-                </div>
-            {% endfor %}
+        {% for product in results %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            {% include 'includes/_product_card.html' %}
+        </div>
+        {% endfor %}
         {% else %}
-            <p>No results found.</p>
+        <p>No results found.</p>
         {% endif %}
     </div>
 </div>

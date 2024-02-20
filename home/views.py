@@ -104,19 +104,33 @@ def add_to_cart(request):
 def search_results(request):
     query = request.GET.get('query')
     sort = request.GET.get('sort', 'name')
+    in_stock = request.GET.get('in_stock', None) is not None
+    on_sale = request.GET.get('on_sale', None) is not None
+
+    results = Product.objects.all()
 
     if query:
-        results = Product.objects.filter(name__icontains=query)
-        if sort == 'price_low_to_high':
-            results = results.order_by('price')
-        elif sort == 'price_high_to_low':
-            results = results.order_by('-price')
-    else:
-        results = Product.objects.none()
+        results = results.filter(name__icontains=query)
 
-    context = {
+    if in_stock:
+        results = results.exclude(stock=0)
+
+    if on_sale:
+        results = results.filter(on_sale=True)
+
+    if sort == 'price_low_to_high':
+        results = results.order_by('price')
+    elif sort == 'price_high_to_low':
+        results = results.order_by('-price')
+    elif sort == 'date_newest':
+        results = results.order_by('-created_at')
+    elif sort == 'date_oldest':
+        results = results.order_by('created_at')
+
+    return render(request, 'home/search_results.html', {
         'results': results,
         'query': query,
-        'sort': sort
-    }
-    return render(request, 'home/search_results.html', context)
+        'sort': sort,
+        'in_stock': in_stock,
+        'on_sale': on_sale
+    })

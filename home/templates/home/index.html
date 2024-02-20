@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block content %}
-<div class="products-bar">- New Arrivals -</div>
+<div class="products-bar-sort products-bar">- New Arrivals -
+        {% include 'includes/_search_form.html' %}
+</div>
 <div class="container">
     <div class="row">
         {% for product in products %}

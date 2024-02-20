@@ -1,0 +1,16 @@
+<form class="search search-form d-flex align-items-center" method="get" action="{% url 'search_results' %}">
+    Sort:
+    <input type="hidden" name="query" value="{{ query }}">
+    <select name="sort" onchange="this.form.submit()">
+        <option value="name" {% if sort == 'name' %}selected{% endif %}>A - Z</option>
+        <option value="price_low_to_high" {% if sort == 'price_low_to_high' %}selected{% endif %}>Price Low to High</option>
+        <option value="price_high_to_low" {% if sort == 'price_high_to_low' %}selected{% endif %}>Price High to Low</option>
+        <option value="date_newest" {% if sort == 'date_newest' %}selected{% endif %}>Newest</option>
+        <option value="date_oldest" {% if sort == 'date_oldest' %}selected{% endif %}>Oldest</option>
+    </select>
+</form>
+<form class="search filter-form">
+    <label><input type="checkbox" name="in_stock" {% if in_stock %}checked{% endif %}> In Stock</label>
+    <label><input type="checkbox" name="on_sale" {% if on_sale %}checked{% endif %}> On Sale</label>
+    <input class="btn store-button" type="submit" value="Apply Filters">
+</form>

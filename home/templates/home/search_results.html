@@ -1,18 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if results %}
-
-<div class="products-bar">- Search Results -</div>
+<div class="products-bar-sort products-bar">- Search Results -
+    <form class="search" method="get" action="{% url 'search_results' %}"> Sort: 
+        <input type="hidden" name="query" value="{{ query }}">
+        <select name="sort" onchange="this.form.submit()">
+            <option value="name" {% if sort == 'name' %}selected{% endif %}>A - Z</option>
+            <option value="price_low_to_high" {% if sort == 'price_low_to_high' %}selected{% endif %}>Price Low to High</option>
+            <option value="price_high_to_low" {% if sort == 'price_high_to_low' %}selected{% endif %}>Price High to Low</option>
+        </select>
+    </form>
+</div>
 <div class="container">
     <div class="row">
-        {% for product in results %}
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                {% include 'includes/_product_card.html' %}
-        </div>
-        {% endfor %}
+        {% if results %}
+            {% for product in results %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    {% include 'includes/_product_card.html' %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
     </div>
 </div>
-{% else %}
-<p>No results found.</p>
-{% endif %}
 {% endblock %}

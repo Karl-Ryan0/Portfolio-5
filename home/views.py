@@ -103,9 +103,20 @@ def add_to_cart(request):
 
 def search_results(request):
     query = request.GET.get('query')
+    sort = request.GET.get('sort', 'name')
+
     if query:
         results = Product.objects.filter(name__icontains=query)
+        if sort == 'price_low_to_high':
+            results = results.order_by('price')
+        elif sort == 'price_high_to_low':
+            results = results.order_by('-price')
     else:
         results = Product.objects.none()
-    
-    return render(request, 'home/search_results.html', {'results': results})
+
+    context = {
+        'results': results,
+        'query': query,
+        'sort': sort
+    }
+    return render(request, 'home/search_results.html', context)

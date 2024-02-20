@@ -305,3 +305,13 @@ button {
 .cart-summary h3 {
     margin-right: 20px;
 }
+
+.products-bar-sort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-form {
+    margin-left: auto;
+}

@@ -134,3 +134,20 @@ def search_results(request):
         'in_stock': in_stock,
         'on_sale': on_sale
     })
+
+
+def staff_check(user):
+    return user.is_staff
+
+
+@login_required
+@user_passes_test(staff_check)
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ProductForm()
+    return render(request, 'home/add_product.html', {'form': form})

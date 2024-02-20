@@ -8,8 +8,8 @@
             <h4>Shipping Address</h4>
             <form method="post">
                 {% csrf_token %}
-                {{ shipping_form.as_p }}
-                <button type="submit" class="btn btn-primary">Continue to Payment</button>
+                {{ shipping_address_form.as_p }}
+                <button type="submit" class="btn store-button">Continue to Payment</button>
             </form>
         </div>
         <div class="col-md-6">

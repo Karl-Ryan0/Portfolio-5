@@ -5,6 +5,10 @@ from .models import UserProfile
 from home.models import ContactMessage
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -12,7 +16,15 @@ from django.http import HttpResponseRedirect
 @login_required
 def profile(request):
     user_profile = UserProfile.objects.get(user=request.user)
-    context = {'user_profile': user_profile}
+    if request.method == 'POST' and 'change_password' in request.POST:
+        password_form = PasswordChangeForm(request.user, request.POST)
+        if password_form.is_valid():
+            user = password_form.save()
+            update_session_auth_hash(request, user)
+            return redirect('profile')
+    else:
+        password_form = PasswordChangeForm(request.user)
+    context = {'user_profile': user_profile, 'password_form': password_form}
     return render(request, 'my_account/profile.html', context)
 
 

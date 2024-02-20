@@ -40,7 +40,11 @@
         </div>
 
         <div id="ChangePassword" class="tabcontent">
-            <p>Testing</p>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ password_form.as_p }}
+                <button type="submit" name="change_password" class="btn store-button">Change Password</button>
+            </form>
         </div>
     </div>
 

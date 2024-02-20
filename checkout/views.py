@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Order, OrderItem
-from cart.models import Cart, CartItem
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
+from cart.models import Cart
 
 # Create your views here.
 
@@ -16,8 +14,8 @@ def checkout(request):
     elif request.user.is_authenticated:
         cart = Cart.objects.filter(user=request.user, active=True).first()
 
-    if not cart:
-        return render(request, 'cart/cart_empty.html', {})
+    if not cart or cart.items.count() == 0:
+        return render(request, 'checkout/cart_empty.html', {})
 
     if request.method == 'POST':
 
@@ -43,3 +41,7 @@ def checkout(request):
         return redirect('checkout:order_confirmation', order_id=order.id)
 
     return render(request, 'checkout/checkout.html', {'cart': cart})
+
+
+def cart_empty(request):
+    return render(request, 'checkout/cart_empty.html')

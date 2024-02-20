@@ -8,7 +8,7 @@
             <h4>Shipping Address</h4>
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ shipping_form.as_p }}
                 <button type="submit" class="btn btn-primary">Continue to Payment</button>
             </form>
         </div>
@@ -27,12 +27,12 @@
                     <tr>
                         <td>{{ item.product.name }}</td>
                         <td>{{ item.quantity }}</td>
-                        <td>${{ item.total_price }}</td>
+                        <td>€{{ item.total_price }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <h5>Total: ${{ cart.total_price }}</h5>
+            <h5>Total: €{{ cart.total_price }}</h5>
         </div>
     </div>
 </div>

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Cart Empty</h2>
+    <p>Your cart is currently empty.</p>
+    <a href="{% url 'home' %}" class="btn store-button">Return to Shop</a>
+</div>
+{% endblock %}

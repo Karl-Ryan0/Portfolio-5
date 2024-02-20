@@ -195,15 +195,20 @@ h1 {
     display: inline-block;
     padding: 5px 10px;
     margin-top: 10px;
-    background-color: #d17630;
-    color: white;
+    color: #d17630;
     border-radius: 5px;
+    border: 1px solid #d17630;
     font-weight: bold;
+}
+
+i {
+    color: #d17630;
 }
 
 footer {
     top: 100%;
     position: sticky;
+    color: white;
 }
 
 .edit-button {
@@ -333,46 +338,3 @@ button {
     line-height: normal;
     font-size: medium;
 }
-
-/* .search-form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.search-form select,
-.search-form input[type="checkbox"],
-.search-form input[type="submit"] {
-    margin: 0;
-    padding: 5px 10px;
-    font-size: 0.8rem;
-}
-
-.search-form select {
-    flex-grow: 1;
-}
-
-.search-form input[type="submit"] {
-    padding: 5px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.search-form input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-.search-form input[type="checkbox"] {
-    transform: scale(0.8);
-}
-
-.search-form label {
-    font-size: 0.8rem;
-    margin-right: 5px;
-}
-
-.search-form > * {
-    margin-bottom: 0;
-} */

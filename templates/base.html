@@ -81,23 +81,28 @@
                 <li>
                   <a href="{% url 'category_items' category.slug %}">{{ category.name }}</a>
                 </li>
-                
+
                 {% endfor %}
-                
+
               </ul>
             </li>
             <li>
-              <a class="nav-link" href="{% url 'cart_detail' %}">
+              <a class="nav-link" href="{% url 'cart_detail' %}"> <i class="fas fa-shopping-cart"></i>
                 | Cart
                 {% if cart.item_count %}
                 ({{ cart.item_count }} | €{{ total_price }})
                 {% else %}
                 (Empty)
                 {% endif %}
-            </a>            
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="#"> <i class="fas fa-shopping-bag"></i>
+                | Checkout
+              </a>
             </li>
           </ul>
-          
+
           <span class="d-flex" role="search">
             <form class="search" action="{% url 'search_results' %}" method="get" class="d-flex" role="search">
               <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
@@ -118,7 +123,7 @@
     <div id="toastContainer" class="toast-container position-fixed end-0 p-3">
     </div>
   </div>
-  <footer class="bg-dark text-white text-center py-3 footer">
+  <footer class="bg-dark text-center py-3 footer">
     &copy; 2024 Karl Ryan. All rights reserved.
     <div class="mt-3">
       <a href="https://www.facebook.com" target="_blank" class="text-white"><i class="fab fa-facebook"></i></a>

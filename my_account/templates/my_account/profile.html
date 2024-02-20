@@ -6,9 +6,11 @@
     <div class="container">
         <div class="products-bar">- My Account - <br> {% if request.user.is_staff %}
             <div class="staff-badge">Employee <i class="fas fa-star"></i>
-                <a href="{% url 'view_messages' %}">View Messages</a>
-                <a href="{% url 'add_product' %}">Add Product</a>
-                <a href="{% url 'create_article' %}">Add Blog Entry</a>
+            </div>
+            <div style="padding-top: 10px;">
+                <a class="btn store-button" href="{% url 'view_messages' %}">View Messages</a>
+                <a class="btn store-button" href="{% url 'add_product' %}">Add Product</a>
+                <a class="btn store-button" href="{% url 'create_article' %}">Add Blog Entry</a>
             </div>
             {% endif %}
         </div>

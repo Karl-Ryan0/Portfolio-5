@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script src="https://js.stripe.com/v3/"></script>
+
+<form action="{% url 'payment' order.id %}" method="post">
+    {% csrf_token %}
+    <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="{{ STRIPE_PUBLIC_KEY }}"
+        data-amount="{{ total_amount_in_cents }}"
+        data-name="Your Site Name"
+        data-description="Payment for Order #{{ order.id }}"
+        data-image="url_to_a_square_image_to_represent_your_business"
+        data-locale="auto">
+    </script>
+</form>
+{% endblock %}

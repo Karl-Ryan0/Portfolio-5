@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Order Confirmation</h2>
+            <p>Thank you for your order, {{ order.user.get_full_name|default:"Customer" }}!</p>
+            <p>Your order ID is: <strong>{{ order.order_id }}</strong></p>
+            <h3>Order Details</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>€{{ item.price }}</td>
+                        <td>€{{ item.get_cost }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="text-right"><strong>Total Paid: €{{ order.paid_amount }}</strong></p>
+            <p>Shipping Address:</p>
+            <address>
+                {{ order.shipping_address.full_name }}<br>
+                {{ order.shipping_address.address_line_1 }}<br>
+                {% if order.shipping_address.address_line_2 %}{{ order.shipping_address.address_line_2 }}<br>{% endif %}
+                {{ order.shipping_address.city }}, {{ order.shipping_address.postal_code }}<br>
+                {{ order.shipping_address.country }}
+            </address>
+        </div>
+    </div>
+</div>
+{% endblock %}

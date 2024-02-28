@@ -1,39 +1,145 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+![Site Logo](static/media/images/logo.png "Website logo and tagline")
+# Karl's Cooking
 
-Welcome,
+Welcome to Karl's Cooking, your ultimate destination for transforming your culinary dreams into reality! Here, we believe that the heart of every home beats in the kitchen, and our mission is to equip you with the finest tools, gadgets, and supplies to make every meal a masterpiece. Whether you're a seasoned chef or just beginning your culinary journey, Karl's Cooking offers an unparalleled selection of high-quality, innovative products designed to inspire creativity, enhance flavors, and simplify your cooking process. Dive into our world, where cooking is not just an activity but an adventure waiting to unfold in every dish you create.
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Features
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
+- **Online Store**: Various categories that users can browse through, sort, filter, and a seperate page that only contains items on special offer.
+![Homepage](static/media/images/homepage.png "Home Page")
+- **Account Management**: Users are able to register for accounts. Inside profile, users can see and change their information as well as orders placed.
+![Adding](static/media/images/add_item.png "Adding items")
+- **Blog**: There's a seperate blog section where users can see blog posts detailing recipes.
+![Account](static/media/images/account.png "My Account")
+- **Cart/Checkout**: Users are able to add items to cart, modify existing carts and ultimately check out to complete their purchase.
+![Verification](static/media/images/verify.png "Verification")
+- **Staff Controls**: Admins and employees are treated to a slightly different experience. Extra buttons and controls are added, detailed below.
 
-## Codeanywhere Reminders
+Users will be able to browse, view and select various cookware items. Items have detailed descriptions. Users will also be able to browse a paginated list of blog posts that contain recipes for cooking.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+## Design
 
-`python3 -m http.server`
+### Fonts:
+Standard fonts are used throughout the site, plans to investigate better fonts.
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### Images:
+Icons have been created personally, using Dall-e 3.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+### Logo/Favicon:
+Designed using paint.net and Dall-e 3.
 
-`http_server`
+<!-- ### Colour Scheme:
+![Palette](static/media/images/palette.png "Colour Scheme")
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+The colour scheme is based on the logo. The logo went through several designs before I settled on the orange and black colour used throughout the site. -->
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### User Suggestions:
+* I would like to be able add favorite items.
+  * This is to be implemented before release.
+* I would like to change or remove my account.
+  * Allauth handles account management.
+* I would like to have the option for multi buy savings.
+  * Would be good to implement if time permits.
+* I want to be able to see user reviews.
+  * This is to be implemented before release.
+* I would like to be able to subscribe for perishable products like oils and spices.
+  * Currently there is no plans to include perishables or subscriptions but could be implemented in future.
+* I would like to look at cooking recipes.
+  * A blog has been implemented.
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+### Staff Controls:
+The website has lots of controls for staff allowing them to make changes to the site and have CRUD functionality. Some examples are:
+* The account page has an employee flag, as well as buttons for:
+  * Viewing messages
+  * Adding products to the store
+  * Adding an entry to the blog
+* Individual product pages have an edit button
+* The blog page has a button to create an article
+* Individual articles have an edit button
 
-To log into the Heroku toolbelt CLI:
+## Technologies Used
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Django (Python)
+- **Database**: ElephantSQL
+- **Payment Service**: Stripe
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+### Libraries Used
+- FontAwesome
+- Bootstrap
+- Cloudinary
+- Django
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+## Testing
+### Validation
+* HTML tested with W3C HTML5 Validator every day.
+* CSS has been validated with W3C CSS Validator every day or major change.
+* Tested against PEP8 validation for compliance. Several errors around indentation found but these were minor and corrected easily.
 
----
+### External Testing
+* My code was sent to friends and family for feedback and testing.
+* All user input is error checked to prevent improper input from the user.
+* As the site was built using a Windows 11 PC, the majority of the testing was done using this machine and VS Code on gitpod, as well as on Heroku.
 
-Happy coding!
+### Internal Testing / Bugs found
+Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
+
+### Database
+Database was initially set up incorrectly and items were using strange tags. By investigating ElephantSQL I was able to see the proper terms to be used in the site, especially in relation to images on the blog.
+
+### Store
+* Users are able to sort and filter but the 'on sale' filter does not work. This will be investigated and resolved before release.
+* Some of the cards in the store are different sizes, this will be fixed before release.
+* The footer was not locked to the bottom of the page regardless of settings. This was caused by a conflict with bootstrap and was resolved using CSS.
+* The product cards would redirect to the item page, even if the add to cart button was pressed. The error was, the URL tag was wrapped around the whole card. I moved it to only wrap around the image only.
+
+
+### Redirects
+* The user was often redirected to the homepage with no warning on deleting favourites or account, with no prompt in the middle. The views had to be rebuilt from the ground up to rectify this and send the user on the correct path.
+
+### JavaScript
+* JavaScript is used in several locations but in the account page it controls the tabs. As this was in the main script.js file it would give a null error and prevent script in other pages. This was resolved by removing the script entirely and moving it to a seperate file that is only called by the account page.
+
+### Automated Testing
+* There was little need for automated testing although I did need some to send mock locations as I was unable to travel to test accuracy.
+
+* I did add automated tests for deleting other user's locations using URL manipulation as I couldn't figure out the exact URL needed.
+
+### Security Testing
+* I also identified that users could:
+    * Access edit pages while not logged in
+    * Manipulate the URL to force account viewing without an account
+    * Manually create blog entries
+
+* These were fixed by adding various checks. Using django conditionals, users are now redirected to the homepage, denied page or 404 page when attempting to access pages they're not supposed to.
+
+## Marketing
+
+### Facebook Business Page
+* A business page was created on Facebook to promote the site:
+![Homepage](static/media/images/facebook-business.png "Home Page")
+* The business page is updated with posts showing special offers or new arrivals:
+![Homepage](static/media/images/facebook-posts.png "Home Page")
+
+### Search Engine Optimisation
+
+<!-- ## Database Schema
+![Database](static/media/images/schema.png "Schema") -->
+
+## Deployment
+1. Navigate to [https://github.com/Karl-Ryan0/Portfolio-5](https://github.com/Karl-Ryan0/Portfolio-5).
+2. You can set up your own repository and copy or clone it, or you fork the repository.
+3. `git add`, `git commit` and `git push` to a GitHub repository, if necessary.
+4. GitHub pages will update from the master branch by default.
+5. Go to the **Settings** page of the repository.
+6. Scroll down to the **Github Pages** section.
+7. Select the Master Branch as the source and **Confirm** the selection.
+8. Wait a minute or two and it should be live for viewing.
+
+Live link can be found [here](https://karls-cooking-be3c433797fc.herokuapp.com/).
+
+## Credits
+* Django backend
+* Bootstrap
+* FontAwesome
+* All code was freehand however additional thanks for the people at Mammoth Interactive and CI for the great tutorials.
+* Images on this readme are my own screenshots.

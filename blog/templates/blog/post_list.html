@@ -11,7 +11,7 @@
 <div class="post">
     <h2><a class="blog-header" href="{% url 'post_detail' post.id %}">{{ post.title|safe }}</a></h2>
     <img class="blog-image img-fluid" src="{{ post.main_image.url }}" alt="{{ post.title }}">
-    <p>{{ post.body|safe|truncatewords:60 }}</p>
+    <p>{{ post.body|safe|truncatewords:20 }}</p>
     <hr class="blog-hr">
 </div>
 

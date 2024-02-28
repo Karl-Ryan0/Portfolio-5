@@ -8,12 +8,13 @@ Welcome to Karl's Cooking, your ultimate destination for transforming your culin
 - **Online Store**: Various categories that users can browse through, sort, filter, and a seperate page that only contains items on special offer.
 ![Homepage](static/media/images/homepage.png "Home Page")
 - **Account Management**: Users are able to register for accounts. Inside profile, users can see and change their information as well as orders placed.
-![Adding](static/media/images/add_item.png "Adding items")
-- **Blog**: There's a seperate blog section where users can see blog posts detailing recipes.
 ![Account](static/media/images/account.png "My Account")
+- **Blog**: There's a seperate blog section where users can see blog posts detailing recipes.
+![Blog](static/media/images/blog.png "Blog")
 - **Cart/Checkout**: Users are able to add items to cart, modify existing carts and ultimately check out to complete their purchase.
-![Verification](static/media/images/verify.png "Verification")
+![Cart](static/media/images/cart.png "Cart")
 - **Staff Controls**: Admins and employees are treated to a slightly different experience. Extra buttons and controls are added, detailed below.
+![Blog](static/media/images/employee-account.png "Employee Account")
 
 Users will be able to browse, view and select various cookware items. Items have detailed descriptions. Users will also be able to browse a paginated list of blog posts that contain recipes for cooking.
 
@@ -28,10 +29,10 @@ Icons have been created personally, using Dall-e 3.
 ### Logo/Favicon:
 Designed using paint.net and Dall-e 3.
 
-<!-- ### Colour Scheme:
+### Colour Scheme:
 ![Palette](static/media/images/palette.png "Colour Scheme")
 
-The colour scheme is based on the logo. The logo went through several designs before I settled on the orange and black colour used throughout the site. -->
+The colour scheme is based on the logo. The logo went through several designs before I settled on the orange and black colour used throughout the site.
 
 ### User Suggestions:
 * I would like to be able add favorite items.
@@ -94,7 +95,7 @@ Database was initially set up incorrectly and items were using strange tags. By 
 
 
 ### Redirects
-* The user was often redirected to the homepage with no warning on deleting favourites or account, with no prompt in the middle. The views had to be rebuilt from the ground up to rectify this and send the user on the correct path.
+* The user is currently being redirected to the cart regardless of intent, when adding an item to the cart. This is also preventing toasts from displaying. While not critical, this should be rectified before release.
 
 ### JavaScript
 * JavaScript is used in several locations but in the account page it controls the tabs. As this was in the main script.js file it would give a null error and prevent script in other pages. This was resolved by removing the script entirely and moving it to a seperate file that is only called by the account page.

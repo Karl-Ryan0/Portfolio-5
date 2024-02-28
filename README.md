@@ -121,6 +121,7 @@ Database was initially set up incorrectly and items were using strange tags. By 
 ![Homepage](static/media/images/facebook-posts.png "Home Page")
 
 ### Search Engine Optimisation
+There are included meta tags in base.html to improve SEO.
 
 <!-- ## Database Schema
 ![Database](static/media/images/schema.png "Schema") -->

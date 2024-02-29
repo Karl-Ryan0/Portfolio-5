@@ -2,13 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, ContactMessage
 from .forms import ContactForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.views.decorators.http import require_POST
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 
 def index(request):
-    products = Product.objects.all().order_by('-created_at')[:4]
+    products = Product.objects.all().order_by('-created_at')[:8]
     categories = Category.objects.all()
     return render(request, 'home/index.html', {
         'products': products,
@@ -36,8 +36,13 @@ def categories_processor(request):
 
 
 def all_products(request):
-    products = Product.objects.all()
-    return render(request, 'home/all_products.html', {'products': products})
+    products_list = Product.objects.all()
+    paginator = Paginator(products_list, 8)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'home/all_products.html', {'page_obj': page_obj})
 
 
 def contact(request):

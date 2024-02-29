@@ -338,3 +338,24 @@ button {
     line-height: normal;
     font-size: medium;
 }
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 20px 50px;
+  }
+  
+  .pagination a {
+    margin: 0 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: #333;
+  }
+
+  .pagination a:hover {
+    color: black;
+    background-color: #d17630;
+    border-radius: 5px;
+  }
+  

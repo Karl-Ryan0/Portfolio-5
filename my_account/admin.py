@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, BlogSubscriber, ShopSubscriber
 
 
 class UserProfileInline(admin.StackedInline):
@@ -19,6 +19,21 @@ class CustomUserAdmin(BaseUserAdmin):
             return list()
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
 
+
+class BlogSubscriberAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(userprofile__blog_mailing_list=True)
+
+
+class ShopSubscriberAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(userprofile__shopping_mailing_list=True)
+
+
+admin.site.register(BlogSubscriber, BlogSubscriberAdmin)
+admin.site.register(ShopSubscriber, ShopSubscriberAdmin)
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)

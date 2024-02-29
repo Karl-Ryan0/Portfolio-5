@@ -17,8 +17,13 @@ def index(request):
 
 
 def sale_items(request):
-    sale_items = Product.objects.filter(on_sale=True)
-    return render(request, 'home/sale_items.html', {'sale_items': sale_items})
+    sale_items_list = Product.objects.filter(on_sale=True)
+    paginator = Paginator(sale_items_list, 8)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'home/sale_items.html', {'page_obj': page_obj})
 
 
 def category_items(request, category_slug):

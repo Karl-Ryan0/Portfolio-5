@@ -24,6 +24,10 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ('get_image_preview',)
     inlines = [ReviewInline]
 
+    def average_rating(self, obj):
+        return obj.rounded_average_rating()
+    average_rating.short_description = 'Avg Rating'
+
     def product_image(self, obj):
         return format_html('<img src="{}" width="auto" height="100px"/>',
                            obj.image.url)

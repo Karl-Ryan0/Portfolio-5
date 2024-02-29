@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 from django.conf import settings
+from django.db.models import Avg
 # Create your models here.
 
 
@@ -33,6 +34,12 @@ class Product(models.Model):
     image = CloudinaryField('image')
     on_sale = models.BooleanField(default=False)
     stock = models.IntegerField(default=50)
+
+    def average_rating(self):
+        return self.reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+
+    def rounded_average_rating(self):
+        return round(self.average_rating(), 2)
 
     def __str__(self):
         return self.name

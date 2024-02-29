@@ -27,6 +27,7 @@
                 {% endif %}
             </div>
             <div class="products-bar">- Reviews -</div>
+            <p class="products-bar">Average Rating: {{ product.rounded_average_rating }} / 5</p>
             {% for review in reviews %}
             <div class="review">
                 <strong>Posted by: {{ review.user.username }}</strong>

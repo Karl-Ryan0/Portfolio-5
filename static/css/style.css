@@ -359,3 +359,9 @@ button {
     border-radius: 5px;
   }
   
+  .review {
+    border: 1px solid #d17630;
+    border-radius: 5px;
+    margin-top: 5px;
+    max-width: 600px;
+  }

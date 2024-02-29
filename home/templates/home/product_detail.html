@@ -26,15 +26,15 @@
                 <button class="btn store-button disabled">Out of Stock</button>
                 {% endif %}
             </div>
+            <div class="products-bar">- Reviews -</div>
             {% for review in reviews %}
             <div class="review">
-                <strong>{{ review.user.username }}</strong>
+                <strong>Posted by: {{ review.user.username }}</strong>
                 <p>Rating: {{ review.rating }}</p>
                 <p>{{ review.comment }}</p>
                 <p>{{ review.created_at }}</p>
             </div>
             {% endfor %}
-
             {% if user.is_authenticated %}
             <form method="post">
                 {% csrf_token %}

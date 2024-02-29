@@ -1,11 +1,17 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Category, Product, ContactMessage
+from .models import Category, Product, ContactMessage, Review
 
 # Register your models here.
 
 admin.site.register(Category)
 admin.site.register(ContactMessage)
+admin.site.register(Review)
+
+
+class ReviewInline(admin.TabularInline):
+    model = Review
+    extra = 1
 
 
 @admin.register(Product)
@@ -16,6 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description', 'category__name')
     ordering = ('name', 'price')
     readonly_fields = ('get_image_preview',)
+    inlines = [ReviewInline]
 
     def product_image(self, obj):
         return format_html('<img src="{}" width="auto" height="100px"/>',

@@ -85,14 +85,15 @@ The website has lots of controls for staff allowing them to make changes to the 
 Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 
 ### Database
-Database was initially set up incorrectly and items were using strange tags. By investigating ElephantSQL I was able to see the proper terms to be used in the site, especially in relation to images on the blog.
+* Database was initially set up incorrectly and items were using strange tags. By investigating ElephantSQL I was able to see the proper terms to be used in the site, especially in relation to images on the blog.
+* When attempting to create a one to one field for newsletter subscription, I would get an AttributeError. This was resolved by updating the UserProfile model, which led to - 
+* When attempting to access the subscription list I got a FieldError. This was resolved by changing admin.py to filter correctly.
 
 ### Store
 * Users are able to sort and filter but the 'on sale' filter does not work. This will be investigated and resolved before release.
 * Some of the cards in the store are different sizes, this will be fixed before release.
 * The footer was not locked to the bottom of the page regardless of settings. This was caused by a conflict with bootstrap and was resolved using CSS.
 * The product cards would redirect to the item page, even if the add to cart button was pressed. The error was, the URL tag was wrapped around the whole card. I moved it to only wrap around the image only.
-
 
 ### Redirects
 * The user is currently being redirected to the cart regardless of intent, when adding an item to the cart. This is also preventing toasts from displaying. While not critical, this should be rectified before release.
@@ -123,6 +124,9 @@ Database was initially set up incorrectly and items were using strange tags. By 
 
 ### Search Engine Optimisation
 There are included meta tags in base.html to improve SEO.
+
+### Business Model
+Business model can be found [here](https://github.com/Karl-Ryan0/Portfolio-5/blob/main/business_model.md).
 
 <!-- ## Database Schema
 ![Database](static/media/images/schema.png "Schema") -->

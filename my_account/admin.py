@@ -21,15 +21,19 @@ class CustomUserAdmin(BaseUserAdmin):
 
 
 class BlogSubscriberAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'is_active')
+
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        return qs.filter(userprofile__blog_mailing_list=True)
+        return qs.filter(profile__blog_mailing_list=True)
 
 
 class ShopSubscriberAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'is_active')
+
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        return qs.filter(userprofile__shopping_mailing_list=True)
+        return qs.filter(profile__shopping_mailing_list=True)
 
 
 admin.site.register(BlogSubscriber, BlogSubscriberAdmin)

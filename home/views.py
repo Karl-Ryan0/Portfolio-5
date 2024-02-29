@@ -132,8 +132,12 @@ def search_results(request):
     elif sort == 'date_oldest':
         results = results.order_by('created_at')
 
+    paginator = Paginator(results, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(request, 'home/search_results.html', {
-        'results': results,
+        'page_obj': page_obj,
         'query': query,
         'sort': sort,
         'in_stock': in_stock,

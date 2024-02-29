@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product, Review
 
 
 class ContactForm(forms.Form):
@@ -13,3 +13,9 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ['name', 'category', 'description',
                   'price', 'image', 'on_sale']
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']

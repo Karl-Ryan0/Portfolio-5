@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, ContactMessage
-from .forms import ContactForm, ProductForm
+from .forms import ContactForm, ProductForm, ReviewForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.paginator import Paginator
 
@@ -76,7 +76,23 @@ def about(request):
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'home/product_detail.html', {'product': product})
+    reviews = product.reviews.all()
+    new_review = None
+
+    if request.method == 'POST':
+        review_form = ReviewForm(data=request.POST)
+        if review_form.is_valid():
+            new_review = review_form.save(commit=False)
+            new_review.product = product
+            new_review.user = request.user
+            new_review.save()
+            return redirect('product_detail', product_id=product.id)
+    else:
+        review_form = ReviewForm()
+
+    return render(request, 'home/product_detail.html', {'product': product,
+                                                        'reviews': reviews,
+                                                        'new_review': new_review, 'review_form': review_form})
 
 
 def my_account(request):

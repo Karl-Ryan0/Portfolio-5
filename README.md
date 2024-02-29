@@ -128,8 +128,8 @@ There are included meta tags in base.html to improve SEO.
 ### Business Model
 Business model can be found [here](https://github.com/Karl-Ryan0/Portfolio-5/blob/main/business_model.md).
 
-<!-- ## Database Schema
-![Database](static/media/images/schema.png "Schema") -->
+## Database Schema
+![Database](static/media/images/schema.png "Schema")
 
 ## Deployment
 1. Navigate to [https://github.com/Karl-Ryan0/Portfolio-5](https://github.com/Karl-Ryan0/Portfolio-5).

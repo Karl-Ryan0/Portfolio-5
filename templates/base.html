@@ -91,10 +91,11 @@
               </ul>
             </li>
             <li>
-              <a class="nav-link" href="{% url 'cart_detail' %}"> <i class="fas fa-shopping-cart"></i>
+              <a class="nav-link" href="{% url 'cart_detail' %}">
+                <i class="fas fa-shopping-cart"></i>
                 | Cart
-                {% if cart.item_count %}
-                ({{ cart.item_count }} | €{{ total_price }})
+                {% if product_count %}
+                ({{ product_count }} | €{{ total }})
                 {% else %}
                 (Empty)
                 {% endif %}

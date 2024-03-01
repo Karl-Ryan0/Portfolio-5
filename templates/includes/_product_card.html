@@ -21,7 +21,12 @@
             {% endif %}
         </div>
         {% if product.stock > 0 %}
-        <a class="btn store-button" href="{% url 'add_to_cart' product.id %}">Add to cart</a>
+        <form action="{% url 'add_to_cart' product.id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="redirect_url" value="{% url 'product_detail' product.id %}">
+            <button type="submit" class="btn store-button">Add to cart</button>
+        </form>
         {% else %}
         <button class="btn store-button disabled" disabled>Out of Stock</button>
         {% endif %}

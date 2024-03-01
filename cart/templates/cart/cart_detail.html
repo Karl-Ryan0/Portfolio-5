@@ -1,44 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="products-bar"> - Your Cart -</div>
+<div class="products-bar">- Your Cart -</div>
 <div class="container">
-    <div class="row">
-        {% for item in cart.items.all %}
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 cart-item-container">
-            <a href="{% url 'product_detail' item.product.id %}" class="card-link">
-                <img src="{{ item.product.image.url }}" class="card-img-top cart-product" alt="{{ item.product.name }}"> 
-            </a>
-            <div class="item-info">
-                <h5>{{ item.product.name }}</h5>
-                {% if item.product.on_sale %}
-                <span class="price special-offer">€{{ item.product.price }} - Special Offer!</span>
-                {% else %}
-                <span class="price">€{{ item.product.price }}</span>
-                {% endif %}
-                <form action="{% url 'update_cart_item' item.id %}" method="post">
-                    {% csrf_token %}
-                    <div class="d-flex justify-content-around">
-                    <span>Quantity:<input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control"></span></div>
-                    <div class="d-flex justify-content-around">
-                        <input type="submit" value="Update" class="btn store-button mt-2">
-                    </div>
-                </form>
-                <form action="{% url 'remove_item' item.id %}" method="post">
-                    {% csrf_token %}
-                <input type="submit" value="Remove" data-item-id="{{ item.id }}" data-item-name="{{ item.product.name }}" class="btn edit-button mt-2 remove-item-btn">
-                </form>
-            </div>
+    {% for item in cart_products %}
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4 cart-item-container">
+        <a href="{% url 'product_detail' item.product.id %}" class="card-link">
+            <img src="{{ item.product.image.url }}" class="card-img-top cart-product" alt="{{ item.product.name }}">
+        </a>
+        <div class="item-info">
+            <h5>{{ item.product.name }}</h5>
+            <span class="price">€{{ item.product.price }}</span>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Total: €{{ item.total_item_price }}</p>
+            <!-- Update and remove form/actions here -->
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
     <div class="cart-summary">
         <a href="#" class="btn edit-button">Checkout</a>
-        <h3>Total: €{{ cart.total_price }}</h3>
-        
+        <h3>Total: €{{ total_price }}</h3>
     </div>
-    
-    
-    
 </div>
 {% endblock %}

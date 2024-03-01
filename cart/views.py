@@ -1,87 +1,84 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Cart, CartItem, Product
-from django.views.decorators.http import require_http_methods, require_POST
-from django.http import JsonResponse
+from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.contrib import messages
 
-
-# Create your views here.
-
-
-def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    cart_id = request.session.get('cart_id')
-
-    if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(
-            user=request.user, defaults={'user': request.user})
-    else:
-        if cart_id:
-            cart = Cart.objects.get(id=cart_id)
-        else:
-            cart = Cart.objects.create()
-            request.session['cart_id'] = cart.id
-
-    cart_item, created = CartItem.objects.get_or_create(
-        product=product, cart=cart, defaults={'product': product, 'cart': cart}
-    )
-    if not created:
-        cart_item.quantity += 1
-        cart_item.save()
-
-    return redirect('cart_detail')
+from home.models import Product
 
 
 def cart_detail(request):
-    cart_id = request.session.get('cart_id')
-    if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(user=request.user)
-    elif cart_id:
-        cart = Cart.objects.get(id=cart_id)
+    cart = request.session.get('cart', {})
+    cart_products = []
+    total_price = 0
+
+    for item_id, quantity in cart.items():
+        product = Product.objects.get(id=item_id)
+        total_item_price = product.price * quantity
+        total_price += total_item_price
+
+        cart_products.append({
+            'product_id': item_id,
+            'quantity': quantity,
+            'product': product,
+            'total_item_price': total_item_price,
+        })
+
+    return render(request, 'cart/cart_detail.html', {
+        'cart_products': cart_products,
+        'total_price': total_price,
+    })
+
+
+def add_to_cart(request, item_id):
+    print("Add to cart view called")
+    product = get_object_or_404(Product, pk=item_id)
+    quantity = int(request.POST.get('quantity', 1))
+    print(f"Product ID: {item_id}, Quantity: {quantity}")
+    """Add a quantity of the specified product to the shopping cart"""
+    product = get_object_or_404(Product, pk=item_id)
+    quantity = int(request.POST.get('quantity', 1))
+    redirect_url = request.POST.get('redirect_url', 'cart_detail')
+    cart = request.session.get('cart', {})
+
+    if item_id in cart:
+        cart[item_id] += quantity
+        messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')
     else:
-        cart = None
+        cart[item_id] = quantity
+        messages.success(request, f'Added {product.name} to your cart')
 
-    return render(request, 'cart/cart_detail.html', {'cart': cart})
-
-
-def update_cart_item(request, item_id):
-    if request.method == 'POST':
-        quantity = request.POST.get('quantity', 1)
-        try:
-            if request.user.is_authenticated:
-                cart_item = CartItem.objects.get(
-                    id=item_id, cart__user=request.user)
-            else:
-                cart_id = request.session.get('cart_id')
-                if cart_id:
-                    cart_item = CartItem.objects.get(
-                        id=item_id, cart_id=cart_id)
-                else:
-                    return redirect('cart_error')
-            cart_item.quantity = int(quantity)
-            cart_item.save()
-        except CartItem.DoesNotExist:
-            pass
-        return redirect('cart_detail')
+    request.session['cart'] = cart
+    print(f"Cart after adding: {request.session.get('cart')}")
+    return redirect(redirect_url)
 
 
-@require_POST
-def remove_item(request, item_id):
-    cart_item = None
+def adjust_cart(request, item_id):
+    """Adjust the quantity of the specified product to the specified amount"""
+    product = get_object_or_404(Product, pk=item_id)
+    quantity = int(request.POST.get('quantity'))
+    cart = request.session.get('cart', {})
 
-    if request.user.is_authenticated:
-        cart_item = get_object_or_404(
-            CartItem, id=item_id, cart__user=request.user)
+    if quantity > 0:
+        cart[item_id] = quantity
+        messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')
     else:
-        cart_id = request.session.get('cart_id')
-        if cart_id:
-            cart = get_object_or_404(Cart, id=cart_id)
-            cart_item = get_object_or_404(CartItem, id=item_id, cart=cart)
+        cart.pop(item_id, None)
+        messages.success(request, f'Removed {product.name} from your cart')
 
-    if cart_item:
-        cart_item.delete()
-        messages.add_message(request, messages.SUCCESS, 'Item removed successfully.')
-        return redirect('cart_detail')
-    else:
-        messages.add_message(request, messages.ERROR, 'Item not found or cart session expired.')
-        return redirect('cart_detail')
+    request.session['cart'] = cart
+    return redirect(reverse('cart_detail'))
+
+
+def remove_from_cart(request, item_id):
+    """Remove the item from the shopping cart"""
+    try:
+        product = get_object_or_404(Product, pk=item_id)
+        cart = request.session.get('cart', {})
+
+        cart.pop(item_id, None)  # Safely remove the item if it exists
+        messages.success(request, f'Removed {product.name} from your cart')
+
+        request.session['cart'] = cart
+        return HttpResponse(status=200)
+
+    except Exception as e:
+        messages.error(request, f'Error removing item: {e}')
+        return HttpResponse(status=500)

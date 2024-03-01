@@ -365,3 +365,27 @@ button {
     margin-top: 5px;
     max-width: 600px;
   }
+
+  #messages {
+    position: fixed;
+    right: 10px;
+    z-index: 1000;
+}
+
+.message {
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007bff; /* Default info message */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.message.success {
+    background-color: #d17630; /* Success message */
+}
+
+.message.error {
+    background-color: #dc3545; /* Error message */
+}

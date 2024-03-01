@@ -59,13 +59,3 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-
-function displayMessage(message) {
-    const toastContainer = document.getElementById('toastContainer');
-    toastContainer.innerText = message;
-    toastContainer.style.display = 'block';
-
-    setTimeout(() => {
-        toastContainer.style.display = 'none';
-    }, 5000);
-}

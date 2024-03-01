@@ -6,6 +6,7 @@ from home.models import Product
 
 def cart_detail(request):
     cart = request.session.get('cart', {})
+    print("Cart session data:", cart)
     cart_products = []
     total_price = 0
 

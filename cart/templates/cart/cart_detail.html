@@ -5,7 +5,7 @@
 <div class="container">
     {% for item in cart_products %}
     <div class="col-lg-3 col-md-4 col-sm-6 mb-4 cart-item-container">
-        <a href="{% url 'product_detail' item.product.id %}" class="card-link">
+        <a href="{% url 'product_detail' item.product_id %}" class="card-link">
             <img src="{{ item.product.image.url }}" class="card-img-top cart-product" alt="{{ item.product.name }}">
         </a>
         <div class="item-info">
@@ -13,12 +13,22 @@
             <span class="price">€{{ item.product.price }}</span>
             <p>Quantity: {{ item.quantity }}</p>
             <p>Total: €{{ item.total_item_price }}</p>
-            <!-- Update and remove form/actions here -->
+            <!-- Update quantity form -->
+            <form action="{% url 'adjust_cart' item.product_id %}" method="post">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control">
+                <button type="submit" class="btn btn-info mt-2">Update</button>
+            </form>
+            <!-- Remove item form -->
+            <form action="{% url 'remove_from_cart' item.product_id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger mt-2">Remove</button>
+            </form>
         </div>
     </div>
     {% endfor %}
     <div class="cart-summary">
-        <a href="#" class="btn edit-button">Checkout</a>
+        <a href="{% url 'checkout' %}" class="btn edit-button">Checkout</a>
         <h3>Total: €{{ total_price }}</h3>
     </div>
 </div>

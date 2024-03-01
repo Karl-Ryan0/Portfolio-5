@@ -28,10 +28,8 @@ def cart_detail(request):
 
 
 def add_to_cart(request, item_id):
-    print("Add to cart view called")
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity', 1))
-    print(f"Product ID: {item_id}, Quantity: {quantity}")
     """Add a quantity of the specified product to the shopping cart"""
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity', 1))
@@ -73,12 +71,15 @@ def remove_from_cart(request, item_id):
         product = get_object_or_404(Product, pk=item_id)
         cart = request.session.get('cart', {})
 
-        cart.pop(item_id, None)  # Safely remove the item if it exists
-        messages.success(request, f'Removed {product.name} from your cart')
+        if item_id in cart:  # Check if the item exists in the cart before popping
+            cart.pop(item_id)  # Safely remove the item
+            messages.success(request, f'Removed {product.name} from your cart')
+        else:
+            messages.info(request, "The item was not in your cart.")
 
         request.session['cart'] = cart
-        return HttpResponse(status=200)
+        return redirect('cart_detail')  # Redirect back to the cart detail page
 
     except Exception as e:
         messages.error(request, f'Error removing item: {e}')
-        return HttpResponse(status=500)
+        return redirect('cart_detail')  # Ensure redirection even in case of error

@@ -6,6 +6,11 @@ from cloudinary.models import CloudinaryField
 
 
 class Post(models.Model):
+    """
+    A model representing a blog post.
+    The posts are ordered by their creation date,
+    with the most recently created posts appearing first.
+    """
     title = models.CharField(max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
@@ -20,6 +25,3 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_on']
-
-
-

@@ -246,10 +246,19 @@ button {
     color: #ccc;
 }
 
-.blog-hr {
+.blog-hr, .order-hr {
     border: 2px solid #d17630;
     opacity: 1;
     margin: 0 25%;
+}
+
+a {
+    text-decoration: none;
+    color: #d17630;
+}
+
+.order-hr {
+    margin: 10px 0;
 }
 
 .price {
@@ -388,4 +397,9 @@ button {
 
 .message.error {
     background-color: #dc3545; /* Error message */
+}
+
+.order {
+    border: 1px solid #d17630;
+    border-radius: 5px;
 }

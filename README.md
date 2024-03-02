@@ -94,6 +94,7 @@ Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 * Some of the cards in the store are different sizes, this will be fixed before release.
 * The footer was not locked to the bottom of the page regardless of settings. This was caused by a conflict with bootstrap and was resolved using CSS.
 * The product cards would redirect to the item page, even if the add to cart button was pressed. The error was, the URL tag was wrapped around the whole card. I moved it to only wrap around the image only.
+* The 'on sale' and 'in stock' flags stopped working inexplicably. I updated the form with an action that might have been removed accidentally and it worked again.
 
 ### Redirects
 * The user is currently being redirected to the cart regardless of intent, when adding an item to the cart. This is also preventing toasts from displaying. While not critical, this should be rectified before release.

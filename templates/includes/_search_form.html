@@ -9,7 +9,7 @@
         <option value="date_oldest" {% if sort == 'date_oldest' %}selected{% endif %}>Oldest</option>
     </select>
 </form>
-<form class="search filter-form">
+<form class="search filter-form" method="get" action="{% url 'search_results' %}">
     <label><input type="checkbox" name="in_stock" {% if in_stock %}checked{% endif %}> In Stock</label>
     <label><input type="checkbox" name="on_sale" {% if on_sale %}checked{% endif %}> On Sale</label>
     <input class="btn store-button" type="submit" value="Apply Filters">

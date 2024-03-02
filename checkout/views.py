@@ -37,7 +37,8 @@ def checkout(request):
     shipping_address_form = ShippingAddressForm(request.POST or None)
 
     if request.method == 'POST' and shipping_address_form.is_valid():
-
+        request.session[
+            'shipping_address'] = shipping_address_form.cleaned_data
         return redirect('payment')
 
     return render(request, 'checkout/checkout.html', {
@@ -70,9 +71,17 @@ def payment(request):
             )
 
             if charge['paid']:
+                shipping_address_data = request.session.get(
+                    'shipping_address', {})
                 order = Order.objects.create(
                     user=request.user if request.user.is_authenticated else None,
-                    total_price=total_price
+                    total_price=total_price,
+                    email=shipping_address_data.get('email'),
+                    address=shipping_address_data.get(
+                        'address_line_1') + " " + shipping_address_data.get('address_line_2', ''),
+                    postal_code=shipping_address_data.get('postal_code'),
+                    city=shipping_address_data.get('city'),
+                    country=shipping_address_data.get('country')
                 )
 
                 for item_id, quantity in cart_session_data.items():

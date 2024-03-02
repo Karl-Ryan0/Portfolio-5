@@ -101,10 +101,9 @@ Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 ### JavaScript
 * JavaScript is used in several locations but in the account page it controls the tabs. As this was in the main script.js file it would give a null error and prevent script in other pages. This was resolved by removing the script entirely and moving it to a seperate file that is only called by the account page.
 
-### Automated Testing
-* There was little need for automated testing although I did need some to send mock locations as I was unable to travel to test accuracy.
-
-* I did add automated tests for deleting other user's locations using URL manipulation as I couldn't figure out the exact URL needed.
+### Checkout
+* Upon getting an error that seemed to cycle between TypeError and UnboundLocalError I had to completely remove the cart - checkout apps and start fresh several times.
+* Checkout would not pass the cart contents to the payment page.
 
 ### Security Testing
 * I also identified that users could:

@@ -1,21 +1,16 @@
-# from django.contrib import admin
-# from .models import Order, OrderItem
+from django.contrib import admin
+from .models import Order, OrderItem
 
-# # Register your models here.
-
-# admin.site.register(OrderItem)
+# Register your models here.
 
 
-# class OrderItemInline(admin.TabularInline):
-#     model = OrderItem
-#     raw_id_fields = ['product']
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'created_at', 'total_price')
+    list_filter = ('created_at', 'user')
 
 
-# class OrderAdmin(admin.ModelAdmin):
-#     list_display = ['id', 'user', 'paid_amount', 'created_at']
-#     list_filter = ['created_at', 'user']
-#     date_hierarchy = 'created_at'
-#     inlines = [OrderItemInline]
-
-
-# admin.site.register(Order, OrderAdmin)
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('order', 'product', 'quantity', 'price')
+    list_filter = ('order', 'product')

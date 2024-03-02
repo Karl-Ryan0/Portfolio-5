@@ -10,7 +10,12 @@ User = get_user_model()
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
+    """
+    UserProfile model extends the base User model with additional preferences.
+    """
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name='profile')
     blog_mailing_list = models.BooleanField(default=False)
     shopping_mailing_list = models.BooleanField(default=False)
 
@@ -20,6 +25,11 @@ class UserProfile(models.Model):
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
+    """
+    Signal to create or update the user profile.
+    This signal ensures that a UserProfile instance is automatically created
+    or updated whenever a User instance is saved.
+    """
     if created:
         UserProfile.objects.create(user=instance)
     else:
@@ -27,6 +37,9 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 
 
 class BlogSubscriber(get_user_model()):
+    """
+    A model for users who have subscribed to the blog mailing list.
+    """
     class Meta:
         proxy = True
         verbose_name = 'Blog Subscriber'
@@ -34,6 +47,9 @@ class BlogSubscriber(get_user_model()):
 
 
 class ShopSubscriber(get_user_model()):
+    """
+    A model for users who have subscribed to the shopping mailing list.
+    """
     class Meta:
         proxy = True
         verbose_name = 'Shop Subscriber'

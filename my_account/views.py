@@ -8,8 +8,6 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from django.contrib import messages
-from checkout.models import Order
 
 
 # Create your views here.
@@ -17,6 +15,10 @@ from checkout.models import Order
 
 @login_required
 def profile(request):
+    """
+    Display the user's profile page with their order history and profile
+    details.
+    """
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     user_profile = UserProfile.objects.get(user=request.user)
     if request.method == 'POST' and 'change_password' in request.POST:
@@ -34,7 +36,10 @@ def profile(request):
 
 @login_required
 def edit_profile(request):
-
+    """
+    Allows the user to edit their profile information including mailing list
+    subscriptions.
+    """
     user_profile, created = UserProfile.objects.get_or_create(
         user=request.user)
 
@@ -58,6 +63,11 @@ def edit_profile(request):
 
 @login_required
 def view_messages(request):
+    """
+    Allows staff users to view contact messages received from users.
+    This view is restricted to staff members and paginates the messages for
+    easier navigation.
+    """
     if not request.user.is_staff:
         return redirect('home')
 
@@ -71,6 +81,9 @@ def view_messages(request):
 
 @login_required
 def delete_message(request, message_id):
+    """
+    Allows staff users to delete a specific message by ID.
+    """
     if request.user.is_staff:
         message = get_object_or_404(ContactMessage, id=message_id)
         message.delete()
@@ -79,5 +92,8 @@ def delete_message(request, message_id):
 
 @login_required
 def order_detail(request, order_id):
+    """
+    Displays the details of a specific order, accessible only by the orderer.
+    """
     order = get_object_or_404(Order, id=order_id, user=request.user)
     return render(request, 'my_account/order_detail.html', {'order': order})

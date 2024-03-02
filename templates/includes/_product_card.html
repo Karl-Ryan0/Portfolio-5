@@ -24,7 +24,7 @@
         <form class="custom-form" action="{% url 'add_to_cart' product.id %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="quantity" value="1">
-            <input type="hidden" name="redirect_url" value="{% url 'product_detail' product.id %}">
+            <input type="hidden" name="redirect_url" value="{% url 'cart_detail' %}">
             <button type="submit" class="btn store-button">Add to cart</button>
         </form>
         {% else %}

@@ -3,9 +3,6 @@ from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Order, OrderItem
-from cart.models import Cart, CartItem
-from .forms import ShippingAddressForm
-from django.http import HttpResponseRedirect
 from .forms import ShippingAddressForm
 from home.views import Product
 
@@ -15,6 +12,15 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def checkout(request):
+    """
+    Display the checkout page with cart items and a form for shipping address.
+
+    Retrieves items from the cart stored in the session, calculates the total
+    price and displays the shipping address form. Upon form submission, if
+    valid, stores the shipping address in the session and redirects to the
+    payment page. Redirects to the cart detail page with an error message if
+    the cart is empty.
+    """
     cart_session_data = request.session.get('cart', {})
     cart_products = []
     total_price = 0
@@ -49,6 +55,15 @@ def checkout(request):
 
 
 def payment(request):
+    """
+    Process payment using Stripe and create an order.
+
+    Attempts to create a Stripe charge with the total price of cart items. Upon
+    successful charge, creates an Order with associated OrderItems and shipping
+    address, clears the cart from the session, and redirects to the order
+    confirmation page. Displays an error and redirects to the payment page
+    upon failure.
+    """
     cart_session_data = request.session.get('cart', {})
 
     if not cart_session_data:
@@ -108,5 +123,12 @@ def payment(request):
 
 
 def order_confirmation(request, order_id):
+    """
+    Display an order confirmation page to the user.
+
+    Retrieves an Order by its ID and renders the order confirmation page with
+    order details.
+    """
     order = get_object_or_404(Order, id=order_id)
-    return render(request, 'checkout/order_confirmation.html', {'order': order})
+    return render(request, 'checkout/order_confirmation.html', {'order':
+                                                                order})

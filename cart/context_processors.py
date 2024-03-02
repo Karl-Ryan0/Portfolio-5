@@ -1,11 +1,27 @@
-from decimal import Decimal
-from django.conf import settings
 from django.shortcuts import get_object_or_404
 from home.models import Product
 
 
 def cart_processor(request):
+    """
+    Context processor for cart data.
 
+    This function aggregates data about the items currently in
+    the user's shopping cart,
+    including the total number of items, their cumulative cost,
+    and a list of the items
+    themselves with detailed information.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        A dictionary context containing cart items,
+        their total count, total price,
+        and the grand total price of all items.
+        This context can be used to populate
+        cart data across the site.
+    """
     cart_items = []
     total = 0
     product_count = 0

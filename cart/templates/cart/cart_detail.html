@@ -2,34 +2,35 @@
 
 {% block content %}
 <div class="products-bar">- Your Cart -</div>
-<div class="container">
-    {% for item in cart_products %}
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4 cart-item-container">
-        <a href="{% url 'product_detail' item.product_id %}" class="card-link">
-            <img src="{{ item.product.image.url }}" class="card-img-top cart-product" alt="{{ item.product.name }}">
-        </a>
-        <div class="item-info">
-            <h5>{{ item.product.name }}</h5>
-            <span class="price">€{{ item.product.price }}</span>
-            <p>Quantity: {{ item.quantity }}</p>
-            <p>Total: €{{ item.total_item_price }}</p>
-            <!-- Update quantity form -->
-            <form action="{% url 'adjust_cart' item.product_id %}" method="post">
-                {% csrf_token %}
-                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control">
-                <button type="submit" class="btn btn-info mt-2">Update</button>
-            </form>
-            <!-- Remove item form -->
-            <form action="{% url 'remove_from_cart' item.product_id %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger mt-2">Remove</button>
-            </form>
+<div class="container products-bar-sort">
+    <div class="row">
+        {% for item in cart_products %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 cart-item-container d-flex align-items-stretch">
+            <div class="card w-100">
+                <a href="{% url 'product_detail' item.product_id %}" class="card-link">
+                    <img src="{{ item.product.image.url }}" class="card-img-top" alt="{{ item.product.name }}">
+                </a>
+                <div class="card-body">
+                    <h3 class="card-title products-bar">{{ item.product.name }}</h3>
+                    <p class="card-text">€{{ item.product.price }}</p>
+                    <p class="card-text">Quantity: {{ item.quantity }}</p>
+                    <p class="card-text">Total: €{{ item.total_item_price }}</p>
+                    <form class="d-flex flex-row align-items-center justify-content-between custom-form" action="{% url 'adjust_cart' item.product_id %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm" style="width: 60px;">
+                        <div class="mx-1"></div>
+                        <button type="submit" class="btn store-button">Update</button>
+                        <div class="mx-1"></div>
+                        <button formaction="{% url 'remove_from_cart' item.product_id %}" class="btn edit-button">Remove</button>
+                    </form>
+                </div>
+            </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-    <div class="cart-summary">
-        <a href="{% url 'checkout' %}" class="btn edit-button">Checkout</a>
-        <h3>Total: €{{ total_price }}</h3>
-    </div>
+</div>
+<div class="cart-summary text-center mt-4">
+    <a href="{% url 'checkout' %}" class="btn store-button">Checkout</a>
+    <h3>Total: €{{ total_price }}</h3>
 </div>
 {% endblock %}

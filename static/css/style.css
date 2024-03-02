@@ -46,6 +46,12 @@ form {
     border-radius: 4px;
 }
 
+.custom-form {
+    padding: 0;
+    border: 0;
+    background-color: inherit;
+}
+
 form p,
 form label {
     margin-bottom: 15px;

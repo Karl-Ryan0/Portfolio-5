@@ -106,6 +106,9 @@ Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 * Checkout would not pass the cart contents to the payment page. This was resolved by updating the method to pull from session data.
 * Incorrect information was passed to the success page. This was resolved by changing the template to reflect the changes made above.
 
+### Cosmetics
+* Anywhere using a form would automatically inherit from bootsrtap, this was evident when there was only one button, for example 'log out' or 'add to cart'. Custom CSS styling was nesessary.
+
 ### Security Testing
 * I also identified that users could:
     * Access edit pages while not logged in

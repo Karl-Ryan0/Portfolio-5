@@ -27,7 +27,7 @@
                 <h4>Order ID: {{ order.id }}</h4>
                 <p>Date: {{ order.created_at }}</p>
                 <p>Total: €{{ order.total_price }}</p>
-                <a href="#">View Order</a>
+                <a href="{% url 'order_detail' order.id %}">View Order</a>
             </div>
             {% empty %}
             <p>You have no orders.</p>

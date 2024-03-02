@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
+from checkout.models import Order
 
 
 # Create your views here.
@@ -74,3 +75,9 @@ def delete_message(request, message_id):
         message = get_object_or_404(ContactMessage, id=message_id)
         message.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+@login_required
+def order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    return render(request, 'my_account/order_detail.html', {'order': order})

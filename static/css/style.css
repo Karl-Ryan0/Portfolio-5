@@ -1,42 +1,29 @@
-html,
-body {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
-
 body {
     display: flex;
     flex-direction: column;
     font-family: 'Arial', sans-serif;
     text-align: center;
 }
-
 #logo-banner {
     max-width: 100%;
     max-height: 5rem;
 }
-
 #logo-container {
     background-color: #d17630;
     display: flex;
     justify-content: center;
 }
-
-.page-header {
-    display: inline-block;
-    color: red;
-    size: 100px;
-}
-
 .login-navbar .nav-link {
     display: inline-block;
 }
-
 li>a:hover {
     color: #d17630;
 }
-
 form {
     max-width: 600px;
     margin: 20px auto;
@@ -45,35 +32,24 @@ form {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-
 .custom-form {
     padding: 0;
     border: 0;
     background-color: inherit;
 }
-
-form p,
-form label {
+form p, form label {
     margin-bottom: 15px;
 }
-
 /* Form Input Styles */
-form input[type="text"],
-form input[type="number"],
-form input[type="email"],
-form input[type="password"],
-form textarea,
-form select {
+form input[type="text"], form input[type="number"], form input[type="email"], form input[type="password"], form textarea, form select {
     width: 100%;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-
 form textarea {
     height: 150px;
     resize: vertical;
 }
-
 .products-bar {
     text-align: center;
     font-size: 1.4rem;
@@ -81,63 +57,48 @@ form textarea {
     margin-bottom: 2em;
     text-transform: uppercase;
 }
-
 .special-offer {
     color: #d17630;
     font-weight: bold;
 }
-
-.store-button,
-button {
+.store-button, button {
     border-color: #d17630;
     transition: background-color 0.7s;
     color: black;
     color: #d17630;
     border: 1px solid #d17630;
 }
-
-.store-button:hover,
-button:hover {
+.store-button:hover, button:hover {
     background-color: #d17630;
     border-color: #d17630;
     color: black;
 }
-
 .sale-link {
     color: #d17630;
     text-transform: uppercase;
     text-decoration: underline;
 }
-
 .dropdown {
     background-color: #f8f9fa;
     text-align: center;
 }
-
 .dropdown a {
     text-decoration: none;
     color: black;
 }
-
-h3,
-h2,
-h1 {
+h3, h2, h1 {
     color: #d17630;
 }
-
 .about-us {
     text-align: center;
 }
-
 .card-link {
     text-decoration: none;
     color: black;
 }
-
 .card-link:hover {
     border-color: #d17630;
 }
-
 .product-image {
     width: 100%;
     max-width: 500px;
@@ -145,7 +106,6 @@ h1 {
     display: block;
     margin: 0 auto;
 }
-
 .post-image {
     width: 60%;
     max-width: 500px;
@@ -154,9 +114,7 @@ h1 {
     margin: 0 auto;
     border-radius: 15%;
 }
-
 .blog-image {
-
     width: 60%;
     max-width: 300px;
     height: auto;
@@ -164,39 +122,32 @@ h1 {
     margin: 2em auto;
     border-radius: 15%;
 }
-
 #product-cart-btn {
     left: 20%;
     position: relative;
 }
-
 .tab {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
 }
-
 .tab button {
     border: none;
     padding: 14px 16px;
     transition: 0.3s;
 }
-
 .tab button:hover {
     background-color: #ddd;
 }
-
 .tab button.active {
     background-color: #ccc;
 }
-
 .tabcontent {
     display: none;
     padding: 6px 12px;
     border-top: none;
     background-color: #f1f1f1;
 }
-
 .staff-badge {
     display: inline-block;
     padding: 5px 10px;
@@ -206,89 +157,68 @@ h1 {
     border: 1px solid #d17630;
     font-weight: bold;
 }
-
 i {
     color: #d17630;
 }
-
 footer {
     top: 100%;
     position: sticky;
     color: white;
 }
-
 .edit-button {
     background-color: #d17630;
     transition: background-color 0.7s;
     color: black;
     color: white;
 }
-
 .edit-button:hover {
     background-color: #f1f1f1;
     border-color: #d17630;
     color: #d17630;
 }
-
 button {
     border-radius: 5px;
 }
-
 #toastContainer {
     top: 20%;
     right: 20%;
 }
-
-.toast-header,
-.blog-header {
+.toast-header, .blog-header {
     color: #d17630;
 }
-
 .blog-header {
     text-decoration: none;
 }
-
 .blog-header:hover {
     color: #ccc;
 }
-
 .blog-hr, .order-hr {
     border: 2px solid #d17630;
     opacity: 1;
     margin: 0 25%;
 }
-
 a {
     text-decoration: none;
     color: #d17630;
 }
-
 .order-hr {
     margin: 10px 0;
 }
-
 .price {
     font-weight: bold;
 }
-
-.low-stock,
-.in-stock,
-.out-of-stock {
+.low-stock, .in-stock, .out-of-stock {
     font-weight: bold;
 }
-
 .in-stock {
     color: green;
 }
-
 .low-stock {
     color: #d17630;
 }
-
 .out-of-stock {
     color: red;
 }
-
 .search {
     margin: 0;
     padding: 0;
@@ -296,43 +226,32 @@ a {
     display: flex;
     align-items: center;
 }
-
 .cart-product {
     border-radius: 20%;
 }
-
 .cart-item-container {
     text-align: center;
 }
-
 .cart-hr {
     margin-top: 15px;
 }
-
 .cart-summary {
     display: flex;
     width: auto;
     padding: 25px 10px;
     flex-direction: row-reverse;
-    
 }
-
-.cart-summary h3,
-.cart-summary .btn {
+.cart-summary h3, .cart-summary .btn {
     margin: 0 10px;
 }
-
-
 .cart-summary h3 {
     margin-right: 20px;
 }
-
 .products-bar-sort {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
-
 .search-form {
     display: flex;
     flex-wrap: nowrap;
@@ -340,71 +259,63 @@ a {
     gap: 10px;
     background-color: white;
 }
-
 .filter-form {
     color: black;
     background-color: white;
     font-size: medium;
 }
-
 .filter-form > label, .filter-form > input {
     margin: 0 5px;
     text-transform: capitalize;
     line-height: normal;
     font-size: medium;
 }
-
 .pagination {
     display: flex;
     list-style: none;
     padding: 20px 50px;
-  }
-  
-  .pagination a {
+}
+.pagination a {
     margin: 0 5px;
     padding: 5px 10px;
     text-decoration: none;
     border: 1px solid #ddd;
     color: #333;
-  }
-
-  .pagination a:hover {
+}
+.pagination a:hover {
     color: black;
     background-color: #d17630;
     border-radius: 5px;
-  }
-  
-  .review {
+}
+.review {
     border: 1px solid #d17630;
     border-radius: 5px;
     margin-top: 5px;
     max-width: 600px;
-  }
-
-  #messages {
+}
+#messages {
     position: fixed;
     right: 10px;
     z-index: 1000;
 }
-
 .message {
     padding: 10px;
     margin-bottom: 5px;
     border: 1px solid transparent;
     border-radius: 4px;
     color: #fff;
-    background-color: #007bff; /* Default info message */
+    background-color: #007bff;
+   /* Default info message */
     transition: opacity 0.5s ease-in-out;
 }
-
 .message.success {
-    background-color: #d17630; /* Success message */
+    background-color: #d17630;
+   /* Success message */
 }
-
 .message.error {
-    background-color: #dc3545; /* Error message */
+    background-color: #dc3545;
+   /* Error message */
 }
-
 .order {
     border: 1px solid #d17630;
     border-radius: 5px;

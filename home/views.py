@@ -8,6 +8,10 @@ from django.core.paginator import Paginator
 
 
 def index(request):
+    """
+    Renders the homepage with a selection of products and categories.
+    Fetches the latest 8 products to display on the homepage.
+    """
     products = Product.objects.all().order_by('-created_at')[:8]
     categories = Category.objects.all()
     return render(request, 'home/index.html', {
@@ -17,6 +21,10 @@ def index(request):
 
 
 def sale_items(request):
+    """
+    Displays a paginated list of products that are on sale.
+    Products on sale are filtered and paginated with 8 items per page.
+    """
     sale_items_list = Product.objects.filter(on_sale=True)
     paginator = Paginator(sale_items_list, 8)
 
@@ -27,6 +35,10 @@ def sale_items(request):
 
 
 def category_items(request, category_slug):
+    """
+    Displays products belonging to a specific category.
+    Finds the category by its slug and then filters products by this category.
+    """
     category = get_object_or_404(Category, slug=category_slug)
     products = Product.objects.filter(category=category)
     return render(request, 'home/category_items.html', {
@@ -36,11 +48,18 @@ def category_items(request, category_slug):
 
 
 def categories_processor(request):
+    """
+    Context processor to make all categories available across all templates.
+    """
     categories = Category.objects.all()
     return {'categories': categories}
 
 
 def all_products(request):
+    """
+    Displays a paginated list of all products.
+    All products are paginated with 8 items per page.
+    """
     products_list = Product.objects.all()
     paginator = Paginator(products_list, 8)
 
@@ -51,6 +70,10 @@ def all_products(request):
 
 
 def contact(request):
+    """
+    Renders the contact form page and handles form submission.
+    Upon POST request, validates the form and creates a ContactMessage object.
+    """
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -67,14 +90,25 @@ def contact(request):
 
 
 def contact_success(request):
+    """
+    Renders a success message after a contact message has been successfully
+    submitted.
+    """
     return render(request, 'home/contact_success.html')
 
 
 def about(request):
+    """
+    Renders the 'About Us' page.
+    """
     return render(request, 'home/about.html')
 
 
 def product_detail(request, product_id):
+    """
+    Displays the detail page for a single product.
+    Allows users to submit reviews if they are authenticated.
+    """
     product = get_object_or_404(Product, pk=product_id)
     reviews = product.reviews.all()
     new_review = None
@@ -92,20 +126,33 @@ def product_detail(request, product_id):
 
     return render(request, 'home/product_detail.html', {'product': product,
                                                         'reviews': reviews,
-                                                        'new_review': new_review, 'review_form': review_form})
+                                                        'new_review':
+                                                        new_review,
+                                                        'review_form':
+                                                        review_form})
 
 
 def my_account(request):
+    """
+    Renders the user account page for logged-in users.
+    """
     return render(request, 'home/my_account.html', {'user': request.user})
 
 
 def staff_check(user):
+    """
+    Utility function to check if a user is a staff member.
+    """
     return user.is_staff
 
 
 @login_required
 @user_passes_test(staff_check)
 def edit_product(request, product_id):
+    """
+    Renders the edit form for a specific product and handles form submission.
+    Available only to staff members.
+    """
     product = get_object_or_404(Product, id=product_id)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
@@ -118,6 +165,9 @@ def edit_product(request, product_id):
 
 
 def add_to_cart(request):
+    """
+    Handles adding a specified quantity of a product to the shopping cart.
+    """
     data = json.loads(request.body)
     product_id = data.get('product_id')
     product = get_object_or_404(Product, id=product_id)
@@ -128,6 +178,11 @@ def add_to_cart(request):
 
 
 def search_results(request):
+    """
+    Renders search results based on a query and allows sorting and filtering.
+    Supports sorting by name, price, and date, and filtering by stock status
+    and sale status.
+    """
     query = request.GET.get('query')
     sort = request.GET.get('sort', 'name')
     in_stock = request.GET.get('in_stock', None) is not None
@@ -166,13 +221,14 @@ def search_results(request):
     })
 
 
-def staff_check(user):
-    return user.is_staff
-
-
 @login_required
 @user_passes_test(staff_check)
 def add_product(request):
+    """
+    Renders a form to add a new product to the database and handles
+    form submission.
+    Available only to staff members.
+    """
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():

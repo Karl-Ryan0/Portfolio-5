@@ -19,7 +19,6 @@ def cart_detail(request):
         'cart/cart_detail.html' template.
     """
     cart = request.session.get('cart', {})
-    print("Cart session data:", cart)
     cart_products = []
     total_price = 0
 

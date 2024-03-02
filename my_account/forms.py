@@ -1,10 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 
 
-@login_required
 class UserEditForm(forms.ModelForm):
     """
     A form for editing basic information of a User model instance.
@@ -14,8 +12,10 @@ class UserEditForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name', 'email')
 
+    def __init__(self, *args, **kwargs):
+        super(UserEditForm, self).__init__(*args, **kwargs)
 
-@login_required
+
 class UserProfileForm(forms.ModelForm):
     """
     A form for editing additional information in a UserProfile model instance.

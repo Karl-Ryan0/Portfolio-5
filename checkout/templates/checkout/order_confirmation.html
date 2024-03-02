@@ -6,7 +6,7 @@
         <div class="col-12">
             <h2>Order Confirmation</h2>
             <p>Thank you for your order, {{ order.user.get_full_name|default:"Customer" }}!</p>
-            <p>Your order ID is: <strong>{{ order.order_id }}</strong></p>
+            <p>Your order ID is: <strong>{{ order.id }}</strong></p>
             <h3>Order Details</h3>
             <table class="table">
                 <thead>
@@ -28,14 +28,12 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <p class="text-right"><strong>Total Paid: €{{ order.paid_amount }}</strong></p>
+            <p class="text-right"><strong>Total Paid: €{{ order.total_price }}</strong></p>
             <p>Shipping Address:</p>
             <address>
-                {{ order.shipping_address.full_name }}<br>
-                {{ order.shipping_address.address_line_1 }}<br>
-                {% if order.shipping_address.address_line_2 %}{{ order.shipping_address.address_line_2 }}<br>{% endif %}
-                {{ order.shipping_address.city }}, {{ order.shipping_address.postal_code }}<br>
-                {{ order.shipping_address.country }}
+                {{ order.address }}<br>
+                {{ order.city }}, {{ order.postal_code }}<br>
+                {{ order.country }}
             </address>
         </div>
     </div>

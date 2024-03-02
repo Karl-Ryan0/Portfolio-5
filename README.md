@@ -103,7 +103,8 @@ Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 
 ### Checkout
 * Upon getting an error that seemed to cycle between TypeError and UnboundLocalError I had to completely remove the cart - checkout apps and start fresh several times.
-* Checkout would not pass the cart contents to the payment page.
+* Checkout would not pass the cart contents to the payment page. This was resolved by updating the method to pull from session data.
+* Incorrect information was passed to the success page. This was resolved by changing the template to reflect the changes made above.
 
 ### Security Testing
 * I also identified that users could:

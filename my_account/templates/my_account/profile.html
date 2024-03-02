@@ -22,30 +22,40 @@
         </div>
 
         <div id="Orders" class="tabcontent">
-            <p>Testing</p>
-        </div>
-
-        <div id="Profile" class="tabcontent">
-            <p><strong>Username:</strong> {{ request.user.username }}</p>
-            <p><strong>Name:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
-            <p><strong>Email:</strong> {{ request.user.email }}</p>
-            <p><strong>Mailing list:</strong> {{ user_profile.shopping_mailing_list|yesno:"Yes,No" }} <strong> Blog
-                    Mailing
-                    list:</strong> {{ user_profile.blog_mailing_list|yesno:"Yes,No" }}</p>
-
-            <div class="edit-profile-button">
-                <a href="{% url 'edit_profile' %}" class="btn edit-button">Edit Profile / Manage subscriptions</a>
+            {% for order in orders %}
+            <div class="order">
+                <h4>Order ID: {{ order.id }}</h4>
+                <p>Date: {{ order.created_at }}</p>
+                <p>Total: €{{ order.total_price }}</p>
+                <a href="#">View Order</a>
             </div>
+            {% empty %}
+            <p>You have no orders.</p>
+            {% endfor %}
+        </div>
+    </div>
 
+    <div id="Profile" class="tabcontent">
+        <p><strong>Username:</strong> {{ request.user.username }}</p>
+        <p><strong>Name:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>Mailing list:</strong> {{ user_profile.shopping_mailing_list|yesno:"Yes,No" }} <strong> Blog
+                Mailing
+                list:</strong> {{ user_profile.blog_mailing_list|yesno:"Yes,No" }}</p>
+
+        <div class="edit-profile-button">
+            <a href="{% url 'edit_profile' %}" class="btn edit-button">Edit Profile / Manage subscriptions</a>
         </div>
 
-        <div id="ChangePassword" class="tabcontent">
-            <form method="post" action="{% url 'profile' %}">
-                {% csrf_token %}
-                {{ password_form.as_p }}
-                <button type="submit" name="change_password" class="btn store-button">Change Password</button>
-            </form>
-        </div>
+    </div>
+
+    <div id="ChangePassword" class="tabcontent">
+        <form method="post" action="{% url 'profile' %}">
+            {% csrf_token %}
+            {{ password_form.as_p }}
+            <button type="submit" name="change_password" class="btn store-button">Change Password</button>
+        </form>
+    </div>
     </div>
 
     <script src="{% static 'js/script.js' %}"></script>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import UserEditForm, UserProfileForm
 from .models import UserProfile
+from checkout.models import Order
 from home.models import ContactMessage
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
@@ -15,6 +16,7 @@ from django.contrib import messages
 
 @login_required
 def profile(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
     user_profile = UserProfile.objects.get(user=request.user)
     if request.method == 'POST' and 'change_password' in request.POST:
         password_form = PasswordChangeForm(request.user, request.POST)
@@ -24,7 +26,8 @@ def profile(request):
             return redirect('profile')
     else:
         password_form = PasswordChangeForm(request.user)
-    context = {'user_profile': user_profile, 'password_form': password_form}
+    context = {'user_profile': user_profile,
+               'password_form': password_form, 'orders': orders}
     return render(request, 'my_account/profile.html', context)
 
 
@@ -71,4 +74,3 @@ def delete_message(request, message_id):
         message = get_object_or_404(ContactMessage, id=message_id)
         message.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-

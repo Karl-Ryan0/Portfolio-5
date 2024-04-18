@@ -31,11 +31,11 @@ STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io',
+CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-lq76mtz0ru4.ws-eu110.gitpod.io',
                         'https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io']
 
 
-ALLOWED_HOSTS = ['8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu107.gitpod.io',
+ALLOWED_HOSTS = ['8000-karlryan0-portfolio5-lq76mtz0ru4.ws-eu110.gitpod.io',
                  '8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io', 'karls-cooking-be3c433797fc.herokuapp.com']
 
 

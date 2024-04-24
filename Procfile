@@ -1,1 +1,1 @@
-web: gunicorn karls_cooking.wsgi
+web: gunicorn karls_cooking.wsgi:application --log-file -

@@ -15,13 +15,16 @@
                     <p class="card-text">€{{ item.product.price }}</p>
                     <p class="card-text">Quantity: {{ item.quantity }}</p>
                     <p class="card-text">Total: €{{ item.total_item_price }}</p>
-                    <form class="d-flex flex-row align-items-center justify-content-between custom-form" action="{% url 'adjust_cart' item.product_id %}" method="post">
+                    <form class="d-flex flex-row align-items-center justify-content-between custom-form"
+                        action="{% url 'adjust_cart' item.product_id %}" method="post">
                         {% csrf_token %}
-                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm" style="width: 60px;">
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1"
+                            class="form-control form-control-sm" style="width: 60px;">
                         <div class="mx-1"></div>
                         <button type="submit" class="btn store-button">Update</button>
                         <div class="mx-1"></div>
-                        <button formaction="{% url 'remove_from_cart' item.product_id %}" class="btn edit-button">Remove</button>
+                        <button formaction="{% url 'remove_from_cart' item.product_id %}"
+                            class="btn edit-button">Remove</button>
                     </form>
                 </div>
             </div>

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary_storage
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
@@ -29,14 +31,18 @@ STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if os.path.isfile('env.py'):
+    DEBUG = True
+else:
+    DEBUG = False
+
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-lq76mtz0ru4.ws-eu110.gitpod.io',
-                        'https://8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io']
+                        'https://8000-karlryan0-portfolio5-mcr4xxkr4m3.ws-eu110.gitpod.io']
 
 
 ALLOWED_HOSTS = ['8000-karlryan0-portfolio5-lq76mtz0ru4.ws-eu110.gitpod.io',
-                 '8000-karlryan0-portfolio5-1peb7jgeii8.ws-eu108.gitpod.io', 'karls-cooking-be3c433797fc.herokuapp.com']
+                 '8000-karlryan0-portfolio5-mcr4xxkr4m3.ws-eu110.gitpod.io', 'karls-cooking-be3c433797fc.herokuapp.com']
 
 
 # Application definition
@@ -183,12 +189,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+cloudinary.config(
+    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET')
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

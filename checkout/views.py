@@ -148,7 +148,7 @@ def send_order_confirmation_email(order):
     email_context = {'order': order}
     email_content = render_to_string(email_template, email_context)
 
-    
+
     send_mail(
         subject=email_subject,
         message='',

@@ -36,7 +36,7 @@ STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 # else:
 #     DEBUG = False
 
-DEBUG = True
+DEBUG = False
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-lq76mtz0ru4.ws-eu110.gitpod.io',
@@ -119,6 +119,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 

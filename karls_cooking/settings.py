@@ -36,7 +36,7 @@ STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 # else:
 #     DEBUG = False
 
-DEBUG = False
+DEBUG = True
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-lq76mtz0ru4.ws-eu110.gitpod.io',

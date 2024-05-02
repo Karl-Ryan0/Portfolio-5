@@ -65,5 +65,5 @@ class ContactMessage(models.Model):
     received_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Message from {self.name} received at {
-            self.received_at.strftime('%Y-%m-%d %H:%M')}"
+        return f"Message from {self.name} received at {self.received_at.strftime('%Y-%m-%d %H:%M')}"
+

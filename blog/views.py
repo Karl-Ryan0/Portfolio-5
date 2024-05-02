@@ -65,9 +65,10 @@ def create_article(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.poster_name = request.user.username
+            post.author = request.user
             post.save()
             return redirect('post_detail', post.id)
     else:
         form = PostForm()
     return render(request, 'blog/create_article.html', {'form': form})
+

@@ -144,7 +144,7 @@ def send_order_confirmation_email(order):
     """
     
     email_subject = 'Order Confirmation'
-    email_template = 'checkout/order_confirmation.html'
+    email_template = 'checkout/order_confirmation_email.html'
     email_context = {'order': order}
     email_content = render_to_string(email_template, email_context)
     

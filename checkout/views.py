@@ -2,8 +2,6 @@ import stripe
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
 from .models import Order, OrderItem
 from .forms import ShippingAddressForm
 from home.views import Product
@@ -129,31 +127,8 @@ def order_confirmation(request, order_id):
     Display an order confirmation page to the user.
 
     Retrieves an Order by its ID and renders the order confirmation page with
-    order details. Also sends an order confirmation email.
+    order details.
     """
     order = get_object_or_404(Order, id=order_id)
-    
-    # Send order confirmation email
-    send_order_confirmation_email(order)
-    
-    return render(request, 'checkout/order_confirmation.html', {'order': order})
-
-def send_order_confirmation_email(order):
-    """
-    Send an order confirmation email to the user.
-    """
-    
-    email_subject = 'Order Confirmation'
-    email_template = 'checkout/order_confirmation.html'
-    email_context = {'order': order}
-    email_content = render_to_string(email_template, email_context)
-
-
-    send_mail(
-        subject=email_subject,
-        message='',
-        html_message=email_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[order.user.email],
-        fail_silently=False,
-    )
+    return render(request, 'checkout/order_confirmation.html', {'order':
+                                                                order})

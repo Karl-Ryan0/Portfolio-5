@@ -17,8 +17,16 @@ class ProductForm(forms.ModelForm):
     """
     class Meta:
         model = Product
-        fields = ['name', 'category', 'description',
-                  'price', 'image', 'on_sale']
+        fields = ['name', 'category', 'description', 'price', 'image', 'on_sale']
+
+    def clean_price(self):
+        """
+        Custom validation to ensure that price is a positive value.
+        """
+        price = self.cleaned_data.get('price')
+        if price is not None and price < 0:
+            raise forms.ValidationError("Price must be a positive value.")
+        return price
 
 
 class ReviewForm(forms.ModelForm):

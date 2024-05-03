@@ -145,6 +145,80 @@ Business model can be found [here](https://github.com/Karl-Ryan0/Portfolio-5/blo
 7. Select the Master Branch as the source and **Confirm** the selection.
 8. Wait a minute or two and it should be live for viewing.
 
+## Deployment to Heroku
+
+### Prerequisites
+
+* Heroku Account
+* Heroku CLI
+* Git
+
+### Steps
+
+#### Login to Heroku:
+
+Open a terminal or command prompt and log in to Heroku using the following command:
+
+`heroku login`
+
+#### Navigate to Your Project Directory:
+
+Use the terminal or command prompt to navigate to your Django project directory.
+Create a New Heroku App: Run the following command to create a new Heroku app:
+
+`heroku create karls-cooking`
+
+#### Set the Buildpack:
+
+Heroku needs to know how to build your Django project. Set the buildpack to Python by running:
+
+`heroku buildpacks:set heroku/python`
+
+#### Add PostgreSQL Addon:
+
+Heroku provides a PostgreSQL database for your app. Add it using the following command:
+
+`heroku addons:create heroku-postgresql:hobby-dev`
+
+#### Commit Changes to Git:
+
+If your project is not already a Git repository, initialize it with git init. Then, add all files and commit changes:
+
+`git add .`
+
+`git commit -m "Initial commit"`
+
+#### Push to Heroku:
+Deploy your application to Heroku by pushing your code to the Heroku remote repository:
+
+`git push heroku master`
+
+#### Run Migrations:
+After deployment, run any pending migrations on your Heroku PostgreSQL database:
+
+`heroku run python manage.py migrate`
+
+#### Set Environment Variables:
+The project uses environment variables that won't be carried over. They should be added using the Heroku CLI or through the Heroku Dashboard.
+
+#### Open Your App:
+Once the deployment process is complete, open your app in the browser using:
+
+`heroku open`
+
+#### Monitor Logs:
+You can monitor your application's logs to debug any issues using:
+
+`heroku logs --tail`
+
+The application should now be running on Heroku.
+
+#### Additional Resources
+* [Heroku Dev Center](https://devcenter.heroku.com/)
+* [Deploying Python and Django Apps on Heroku](https://karls-cooking-be3c433797fc.herokuapp.com/)
+* [Heroku PostgreSQL Documentation](https://devcenter.heroku.com/articles/heroku-postgresql)
+
+
 Live link can be found [here](https://karls-cooking-be3c433797fc.herokuapp.com/).
 
 ## Credits

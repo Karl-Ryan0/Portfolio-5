@@ -2,9 +2,12 @@
 {% load static %}
 
 {% block content %}
+{% if request.user.is_staff %}
 <div class="create-article">
     <a href="{% url 'create_article' %}" class="btn store-button">Create Article</a>
 </div>
+{% endif %}
+
 {% for post in page_obj %}
 {% if user.is_staff %}
 {% endif %}

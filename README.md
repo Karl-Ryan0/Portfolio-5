@@ -81,42 +81,58 @@ The website has lots of controls for staff allowing them to make changes to the 
 * All user input is error checked to prevent improper input from the user.
 * As the site was built using a Windows 11 PC, the majority of the testing was done using this machine and VS Code on gitpod, as well as on Heroku.
 
-### Internal Testing / Bugs found
+#### Internal Testing / Bugs found
 Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 
-### Database
+#### Database
 * Database was initially set up incorrectly and items were using strange tags. By investigating ElephantSQL I was able to see the proper terms to be used in the site, especially in relation to images on the blog.
 * When attempting to create a one to one field for newsletter subscription, I would get an AttributeError. This was resolved by updating the UserProfile model, which led to - 
 * When attempting to access the subscription list I got a FieldError. This was resolved by changing admin.py to filter correctly.
 
-### Store
+#### Store
 * Users are able to sort and filter but the 'on sale' filter does not work. This will be investigated and resolved before release.
 * Some of the cards in the store are different sizes, this will be fixed before release.
 * The footer was not locked to the bottom of the page regardless of settings. This was caused by a conflict with bootstrap and was resolved using CSS.
 * The product cards would redirect to the item page, even if the add to cart button was pressed. The error was, the URL tag was wrapped around the whole card. I moved it to only wrap around the image only.
 * The 'on sale' and 'in stock' flags stopped working inexplicably. I updated the form with an action that might have been removed accidentally and it worked again.
 
-### Redirects
+#### Redirects
 * The user is currently being redirected to the cart regardless of intent, when adding an item to the cart. This is also preventing toasts from displaying. While not critical, this should be rectified before release.
 
-### JavaScript
+#### JavaScript
 * JavaScript is used in several locations but in the account page it controls the tabs. As this was in the main script.js file it would give a null error and prevent script in other pages. This was resolved by removing the script entirely and moving it to a seperate file that is only called by the account page.
 
-### Checkout
+#### Checkout
 * Upon getting an error that seemed to cycle between TypeError and UnboundLocalError I had to completely remove the cart - checkout apps and start fresh several times.
 * Checkout would not pass the cart contents to the payment page. This was resolved by updating the method to pull from session data.
 * Incorrect information was passed to the success page. This was resolved by changing the template to reflect the changes made above.
 
-### Cosmetics
-* Anywhere using a form would automatically inherit from bootsrtap, this was evident when there was only one button, for example 'log out' or 'add to cart'. Custom CSS styling was nesessary.
+#### Cosmetics
+* Anywhere using a form would automatically inherit from bootstrap, this was evident when there was only one button, for example 'log out' or 'add to cart'. Custom CSS styling was nesessary.
 
-### Security Testing
+#### Security Testing
 * I also identified that users could:
     * Access edit pages while not logged in
     * Manipulate the URL to force account viewing without an account
     * Manually create blog entries
 
 * These were fixed by adding various checks. Using django conditionals, users are now redirected to the homepage, denied page or 404 page when attempting to access pages they're not supposed to.
+
+#### Registration
+* Users were initially unable to register for accounts due to emails not being sent out. This was initially caused by an oversight where I accidentally left the email backend to console. This was a quick fix, changing the email backend to django.core.mail.backends.smtp.EmailBackend and populating the settings accordingly, but this led to a large string of errors:
+
+* The first step was to input the correct configurations into settings.py but this did not help. This led to a 'network unreachable' error when attempted on Gitpod, and due to an unrelated error, detailed later, I was unable to test in Heroku.
+
+* Somewhat related, there seemed to be a software incompatibility somewhere with the versons of Django, Allauth, ElephantSQL and Heroku. After lots of trial and error, mostly error, I failed to identify a direct fix for the problem. Eventually I gave up and updated all installed plugins to their latest version, which led to a follow on error:
+
+* My ElephantSQL database was version 11 which is incompatible with newer versions of Django. When I first started developing the site, I simply rolled back the version of Django installed, but this was no longer an option as I needed the newer version for email compatibility. As ElephantSQL is now reaching end of life they were not willing to even offer me a paid alternative. Aiven offer a similar free service too so I just needed to migrate the database there and update environment variables.
+
+* When I attempted to launch in Heroku I was given an application error preventing the site from launching. Checking the logs, it seemed that there was an unterminated string literal in home.models preventing the site from launching. This was resolved after a brief investigation but I can't recall changing this file since deployment, leading me to believe that this may have been automatically changed by a linter or was always an issue but was ignored with the previous plugin versions.
+
+* When this was repaired, the site launched fine but led to another error when attempting to test email sending: an authentication error. This was an easy fix; I just needed to update the email password in Heroku environment variables.
+
+#### Development environment
+* It seemed that the development URL was changing randomly and needed to be updated constantly. If encountering an error, ensure that the url is added to allowed hosts in settings.py.
 
 ## Marketing
 
@@ -127,7 +143,11 @@ Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 ![Homepage](static/media/images/facebook-posts.png "Home Page")
 
 ### Search Engine Optimisation
-There are included meta tags in base.html to improve SEO.
+* There are included meta tags in base.html to improve SEO.
+* The site is styled for mobile compatibility.
+* URLs are designed with relevant titles for ease of search.
+* Long form blog entries to attract users looking for recipes.
+* Sitemap.xml and robots.txt included in project.
 
 ### Business Model
 Business model can be found [here](https://github.com/Karl-Ryan0/Portfolio-5/blob/main/business_model.md).

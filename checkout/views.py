@@ -98,7 +98,7 @@ def payment(request):
                         'address_line_1') + " " + shipping_address_data.get('address_line_2', ''),
                     postal_code=shipping_address_data.get('postal_code'),
                     city=shipping_address_data.get('city'),
-                    country=shipping_address_data.get('country')
+                    country=shipping_address_data.get('country'),
                 )
 
                 for item_id, quantity in cart_session_data.items():
@@ -133,26 +133,32 @@ def order_confirmation(request, order_id):
     """
     order = get_object_or_404(Order, id=order_id)
     
-    send_order_confirmation_email(order)
+    # Check if the user is logged in
+    if request.user.is_authenticated:
+        # If logged in, use the user's email
+        send_order_confirmation_email(order.user.email, order, request.session.get('shipping_address'))
+    else:
+        # If not logged in, use the email from the shipping address form data
+        send_order_confirmation_email(request.session.get('shipping_address').get('email'), order, request.session.get('shipping_address'))
     
     return render(request, 'checkout/order_confirmation.html', {'order': order})
 
 
-def send_order_confirmation_email(order):
+def send_order_confirmation_email(email, order, shipping_address):
     """
     Send an order confirmation email to the user.
     """
-    
-    email_subject = 'Order Confirmation'
-    email_template = 'checkout/order_confirmation_email.html'
-    email_context = {'order': order}
-    email_content = render_to_string(email_template, email_context)
-    
-    send_mail(
-        subject=email_subject,
-        message='',
-        html_message=email_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[order.user.email],
-        fail_silently=False,
-    )
+    if email:
+        email_subject = 'Order Confirmation'
+        email_template = 'checkout/order_confirmation_email.html'
+        email_context = {'order': order, 'shipping_address': shipping_address}
+        email_content = render_to_string(email_template, email_context)
+
+        send_mail(
+            subject=email_subject,
+            message='',
+            html_message=email_content,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[email],
+            fail_silently=False,
+        )

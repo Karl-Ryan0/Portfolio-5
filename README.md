@@ -84,6 +84,9 @@ The website has lots of controls for staff allowing them to make changes to the 
 #### Internal Testing / Bugs found
 Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 
+#### Item Creation
+Staff were able to create product items that had negative values, leading to potentially negative value orders or severely reduced total prices, which in turn could severely hamper revenue. This was corrected by adding a simple check to the form that will disallow values below zero.
+
 #### Database
 * Database was initially set up incorrectly and items were using strange tags. By investigating ElephantSQL I was able to see the proper terms to be used in the site, especially in relation to images on the blog.
 * When attempting to create a one to one field for newsletter subscription, I would get an AttributeError. This was resolved by updating the UserProfile model, which led to - 
@@ -106,7 +109,7 @@ Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 * Upon getting an error that seemed to cycle between TypeError and UnboundLocalError I had to completely remove the cart - checkout apps and start fresh several times.
 * Checkout would not pass the cart contents to the payment page. This was resolved by updating the method to pull from session data.
 * Incorrect information was passed to the success page. This was resolved by changing the template to reflect the changes made above.
-* Guest users were unable to check out, instead getting an AttributeError 'NoneType' object has no attribute 'email'.
+* Guest users were unable to check out, instead getting an AttributeError 'NoneType' object has no attribute 'email'. The issue was I was attempting to create an instance of the order model and pass email, but there was no user being assocuated with the order. The code was attempting to access this information from the shipping address. Code needed to be updated to handle situations where order.user was None so that guests can check out.
 
 #### Cosmetics
 * Anywhere using a form would automatically inherit from bootstrap, this was evident when there was only one button, for example 'log out' or 'add to cart'. Custom CSS styling was nesessary.

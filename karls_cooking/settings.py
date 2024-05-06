@@ -31,12 +31,10 @@ STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# if os.path.isfile('env.py'):
-#     DEBUG = True
-# else:
-#     DEBUG = False
-
-DEBUG = False
+if os.path.isfile('env.py'):
+    DEBUG = True
+else:
+    DEBUG = False
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ['https://8000-karlryan0-portfolio5-e4hm3qd998c.ws-eu111.gitpod.io',
@@ -138,13 +136,6 @@ WSGI_APPLICATION = 'karls_cooking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 if os.environ.get('DJANGO_TESTING'):
     DATABASES = {
         'default': {
@@ -193,7 +184,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

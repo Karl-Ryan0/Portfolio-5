@@ -81,8 +81,11 @@ The website has lots of controls for staff allowing them to make changes to the 
 * All user input is error checked to prevent improper input from the user.
 * As the site was built using a Windows 11 PC, the majority of the testing was done using this machine and VS Code on gitpod, as well as on Heroku.
 
+### Manual Testing
+* Manual testing steps are documented [here](https://github.com/Karl-Ryan0/Portfolio-5/blob/main/testing%2Cmd).
+
 #### Internal Testing / Bugs found
-Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
+* Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 
 #### Item Creation
 * Staff were able to create product items that had negative values, leading to potentially negative value orders or severely reduced total prices, which in turn could severely hamper revenue. This was corrected by adding a simple check to the form that will disallow values below zero.

@@ -169,3 +169,87 @@
 * Verified that the newly added blog entry appeared in the list of blog posts.
 * Verification: Observed the presence of the newly added blog entry, confirming staff privilege to create blog posts.
 
+### Test Case: Login Button Functionality
+**Expected:** Clicking the login button should submit the login form and authenticate the user.
+
+**Testing:** Clicked on the login button after entering valid login credentials.
+
+**Result:** User successfully logged in and redirected to the dashboard page.
+#### Steps Taken:
+- Entered valid username and password in the login form.
+- Clicked on the login button.
+- Observed successful authentication message and redirection to the dashboard.
+- *Verification:* Logged-in user's name displayed in the header, confirming successful login.
+
+**Expected:** Clicking the login button without entering any credentials should display an error message.
+
+**Testing:** Clicked on the login button without entering any username or password.
+
+**Result:** Received an error message prompting to enter valid login credentials.
+#### Steps Taken:
+- Left both username and password fields empty.
+- Clicked on the login button.
+- Observed error message indicating that login credentials are required.
+- *Verification:* Confirmed error message displayed as expected when no credentials were provided.
+
+### Test Case: Navigation Links
+**Expected:** Clicking on a navigation link should redirect the user to the corresponding page.
+
+**Testing:** Clicked on the "Home" navigation link.
+
+**Result:** Successfully redirected to the home page.
+#### Steps Taken:
+- Located and clicked on the "Home" navigation link.
+- Observed redirection to the home page.
+- Verified that the content of the home page was displayed.
+- *Verification:* Confirmed successful navigation to the home page.
+
+**Expected:** Clicking on a disabled navigation link should not trigger any action.
+
+**Testing:** Attempted to click on a disabled "Admin Dashboard" navigation link.
+
+**Result:** No response or redirection occurred upon clicking the disabled link.
+#### Steps Taken:
+- Identified and clicked on the "Create Blog Post" navigation link, which was disabled.
+- Observed a redirect to the homepage for non-staff users.
+- Verified that the disabled link remained inactive.
+- *Verification:* Confirmed that clicking on the disabled link did not produce any action, as expected.
+
+### Test Case: Product Price Validation
+**Expected:** Users should not be able to add products with negative prices.
+
+**Testing:** Attempted to add a product with a negative price (-€10).
+
+**Result:** The product was successfully added despite the negative price.
+#### Steps Taken:
+- Reviewed the product creation form and associated validation logic.
+- Identified that the validation did not include a check for negative prices.
+- Updated the product creation form validation to include a check for negative prices.
+- Retested product addition with a negative price.
+- *Verification:* Confirmed that the product addition failed with an error message for negative prices.
+
+### Test Case: Product Price Field Validation
+**Expected:** The product creation form should display an error message when a negative price is entered.
+
+**Testing:** Entered a negative price (-€5) in the price field of the product creation form.
+
+**Result:** The form accepted the negative price without displaying any validation error.
+#### Steps Taken:
+- Reviewed the frontend validation scripts associated with the product creation form.
+- Found that the frontend validation did not include a check for negative prices.
+- Updated the frontend validation scripts to include validation for negative prices.
+- Retested the product creation form with a negative price.
+- *Verification:* Confirmed that the form displayed an error message for negative prices.
+
+### Test Case: Product Price Update Validation
+**Expected:** Users should not be able to update product prices to negative values.
+
+**Testing:** Attempted to update a product's price to a negative value (-€15).
+
+**Result:** The product price was successfully updated to the negative value.
+#### Steps Taken:
+- Reviewed the product update form and associated validation logic.
+- Discovered that the validation for product updates did not include a check for negative prices.
+- Updated the product update form validation to include a check for negative prices.
+- Retested product price updates with a negative value.
+- *Verification:* Confirmed that the product price update failed with an error message for negative prices.

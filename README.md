@@ -85,7 +85,7 @@ The website has lots of controls for staff allowing them to make changes to the 
 Code was mostly tested on VS Code and PythonTutor with regular PEP8 checks.
 
 #### Item Creation
-Staff were able to create product items that had negative values, leading to potentially negative value orders or severely reduced total prices, which in turn could severely hamper revenue. This was corrected by adding a simple check to the form that will disallow values below zero.
+* Staff were able to create product items that had negative values, leading to potentially negative value orders or severely reduced total prices, which in turn could severely hamper revenue. This was corrected by adding a simple check to the form that will disallow values below zero.
 
 #### Database
 * Database was initially set up incorrectly and items were using strange tags. By investigating ElephantSQL I was able to see the proper terms to be used in the site, especially in relation to images on the blog.
